@@ -48,6 +48,7 @@ public class AmeSkills : MonoBehaviour
             Shoot();
         }
 
+        //invoke skill 2
         if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
         {
             Skill2Timer = Skill2CoolDown;
@@ -64,9 +65,24 @@ public class AmeSkills : MonoBehaviour
 
     }
 
+    int GroundPoundDamage;
+    float GroundPoundDelay = 1f;
+
+
     void GroundPound()
     {
-        throw new NotImplementedException();
+        //TODO : play ground pound animation
+
+        Invoke(nameof(GroundPound0), GroundPoundDelay);
+    }
+    void GroundPound0()
+    {
+        
+        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.z), 2);
+        foreach (var obj in objectsInRange)
+        {
+            if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().HitPoint -= GroundPoundDamage;
+        }
     }
 
     void DecreaseTimers()
