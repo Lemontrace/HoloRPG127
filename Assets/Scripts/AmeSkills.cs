@@ -6,6 +6,7 @@ using UnityEngine;
 public class AmeSkills : MonoBehaviour
 {
 
+    public GameObject BulletPrefab;
     int BulletCount = 20;
     float BulletSpread = 30; //spread in degrees
     float BulletSpeed = 15;
@@ -21,8 +22,6 @@ public class AmeSkills : MonoBehaviour
     float RewindDelay = 1.5f;
     float RewindResolution = 0.1f;
     float RewindLength = 3f;
-
-    public GameObject BulletPrefab;
 
     float Skill1CoolDown = 1f;
     private float Skill1Timer = 0f;
