@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Yagoo : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (GetComponent<Generic>().HitPoint <= 0) Die();
+        GetComponent<Generic>().OnZeroHP += Die;
     }
-
     void Die()
     {
         //idk some epic death I guess;

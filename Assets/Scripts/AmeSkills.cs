@@ -6,20 +6,31 @@ using UnityEngine;
 public class AmeSkills : MonoBehaviour
 {
 
+    int BulletCount = 20;
+    float BulletSpread = 30; //spread in degrees
+    float BulletSpeed = 15;
+    float MaxBulletRange = 7;
+    float BulletDamage = 2;
+
+    float GroundPoundDamage = 150f;
+    float GroundPoundRadious = 2f;
+    float GroundPoundDelay = 1f;
+
     LinkedList<Vector3> PastPositions = new LinkedList<Vector3>();
     private float PositionRecordTimer = 0.0f;
+    float RewindDelay = 1.5f;
     float RewindResolution = 0.1f;
-    float RewindLength = 5f;
+    float RewindLength = 3f;
 
     public GameObject BulletPrefab;
 
-    float Skill1CoolDown = 0.5f;
+    float Skill1CoolDown = 1f;
     private float Skill1Timer = 0f;
 
-    float Skill2CoolDown = 10f;
+    float Skill2CoolDown = 65f;
     private float Skill2Timer = 0f;
 
-    float Skill3CoolDown = 20f;
+    float Skill3CoolDown = 35f;
     private float Skill3Timer = 0f;
 
     void Start()
@@ -55,7 +66,7 @@ public class AmeSkills : MonoBehaviour
             GroundPound();
         }
 
-            //invoke skill 3
+        //invoke skill 3
             if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
         {
             Skill3Timer = Skill3CoolDown;
@@ -64,27 +75,6 @@ public class AmeSkills : MonoBehaviour
 
 
     }
-
-    int GroundPoundDamage;
-    float GroundPoundDelay = 1f;
-
-
-    void GroundPound()
-    {
-        //TODO : play ground pound animation
-
-        Invoke(nameof(GroundPound0), GroundPoundDelay);
-    }
-    void GroundPound0()
-    {
-        
-        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.z), 2);
-        foreach (var obj in objectsInRange)
-        {
-            if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().HitPoint -= GroundPoundDamage;
-        }
-    }
-
     void DecreaseTimers()
     {
         PositionRecordTimer -= Time.deltaTime;
@@ -95,26 +85,49 @@ public class AmeSkills : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
-        bullet.GetComponent<LinearBullet>().Speed = 10f;
-        bullet.GetComponent<LinearBullet>().Direction = gameObject.GetComponent<Generic>().Facing;
+        for (int i = 0; i < BulletCount; i++)
+        {
+            //instantiate bullet
+            GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+
+            //set its speed and damage
+            bullet.GetComponent<LinearBullet>().Speed = BulletSpeed;
+            bullet.GetComponent<LinearBullet>().Damage = BulletDamage;
+
+            //add randomness to its direction
+            Quaternion randomness = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-BulletSpread / 2, +BulletSpread / 2));
+            bullet.GetComponent<LinearBullet>().Direction = randomness * GetComponent<Generic>().Facing;
+
+            //set random range
+            bullet.GetComponent<LinearBullet>().Range = UnityEngine.Random.Range(MaxBulletRange / 3, MaxBulletRange);
+
+        }
+
     }
 
-
-
+    void GroundPound()
+    {
+        //TODO : play ground pound animation
+        
+        Invoke(nameof(GroundPound_0), GroundPoundDelay);
+    }
+    void GroundPound_0()
+    {
+        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), GroundPoundRadious);
+        foreach (var obj in objectsInRange)
+        {
+            if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().Damage(GroundPoundDamage);
+        }
+    }
 
 
     private void RecordPosition()
     {
-        if (PositionRecordTimer <= 0)
-        {
-            PositionRecordTimer = RewindResolution;
-            PastPositions.AddLast(transform.position);
-            PastPositions.RemoveFirst();
-        }
+        PositionRecordTimer = RewindResolution;
+        PastPositions.AddLast(transform.position);
+        PastPositions.RemoveFirst();
     }
 
-    float RewindDelay = 2f;
     Vector3 RewindPosition;
     float MovementSpeedTemp;
 
