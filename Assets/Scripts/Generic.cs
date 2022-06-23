@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,53 @@ public class Generic : MonoBehaviour
     public event OnHitCallback OnHit;
 
     public delegate void OnZeroHPCallback();
-    public OnZeroHPCallback OnZeroHP;
+    public event OnZeroHPCallback OnZeroHP;
 
     //TODO : maybe OnHeal if needed
 
+    private EffectHandler effectHandler;
+
     public Vector3 Facing;
+
+    public float MaxHitPoint;
+
     public float HitPoint;
-    public float Defence;
+
+    public float BaseDefence;
+    public float Defence
+    {
+        get;set;
+        /*
+        get
+        {
+            float value = BaseDefence;
+            foreach (var effect in effectHandler.AllEffects)
+                if (effect is Effect.DefenceMuliplier) value *= ((Effect.DefenceMuliplier)effect).Amount;
+            return value;
+        }
+        */
+    }
+
+    public float BaseMovementSpeed;
+    public float MovementSpeed {
+        get {
+            if (Rooted) return 0;
+
+            float value = BaseMovementSpeed;
+            foreach (var effect in effectHandler.AllEffects)
+                if (effect is Effect.SpeedMuliplier) value *= ((Effect.SpeedMuliplier)effect).Amount;
+            return value;
+        }
+    }
+
+    public bool Stuned { get { return effectHandler.AllEffects.Exists((effect) => effect is Effect.Stun);  } }
+    public bool Rooted { get { return Stuned || effectHandler.AllEffects.Exists((effect) => effect is Effect.Root); } }
+
+    private void Start()
+    {
+        effectHandler = GetComponent<EffectHandler>();
+    }
+
 
     public void Damage(float amount)
     {
