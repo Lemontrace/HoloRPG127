@@ -128,28 +128,21 @@ public class AmeSkills : MonoBehaviour
         PastPositions.RemoveFirst();
     }
 
-    Vector3 RewindPosition;
-    float MovementSpeedTemp;
+    private Vector3 RewindPosition;
 
     void Rewind()
     {
-        SimpleControl simpleControl = GetComponent<SimpleControl>();
-        //save movement speed
-        MovementSpeedTemp = simpleControl.MovementSpeed;
-        //set movement speed to 0
-        simpleControl.MovementSpeed = 0;
+        //make the character unable to move during animation
+        GetComponent<EffectHandler>().AddEffect(new Effect.Stun(RewindDelay));
         //save rewind position
         RewindPosition = PastPositions.First.Value;
-        //start rewind animation
-        //TODO
+        //TODO : start rewind animation
+        
         Invoke(nameof(Rewind_0), RewindDelay);
     }
 
     void Rewind_0()
     {
-        //rewind position
         transform.position = RewindPosition;
-        //restore movement speed
-        GetComponent<SimpleControl>().MovementSpeed = MovementSpeedTemp;
     }
 }
