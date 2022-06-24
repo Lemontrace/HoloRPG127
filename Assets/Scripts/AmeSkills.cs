@@ -107,16 +107,14 @@ public class AmeSkills : MonoBehaviour
     void GroundPound()
     {
         //TODO : play ground pound animation
-        
-        Invoke(nameof(GroundPound_0), GroundPoundDelay);
-    }
-    void GroundPound_0()
-    {
-        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), GroundPoundRadious);
-        foreach (var obj in objectsInRange)
+        Util.DelayedExecutionManager.ScheduleAction(() =>
         {
-            if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().Damage(GroundPoundDamage);
-        }
+            Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), GroundPoundRadious);
+            foreach (var obj in objectsInRange)
+            {
+                if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().Damage(GroundPoundDamage);
+            }
+        }, GroundPoundDelay);
     }
 
 
@@ -127,21 +125,13 @@ public class AmeSkills : MonoBehaviour
         PastPositions.RemoveFirst();
     }
 
-    private Vector3 RewindPosition;
-
     void Rewind()
     {
         //make the character unable to move during animation
         GetComponent<EffectHandler>().AddEffect(new Effect.Stun(RewindDelay));
         //save rewind position
-        RewindPosition = PastPositions.First.Value;
+        Vector3 rewindPosition = PastPositions.First.Value;
         //TODO : start rewind animation
-        
-        Invoke(nameof(Rewind_0), RewindDelay);
-    }
-
-    void Rewind_0()
-    {
-        transform.position = RewindPosition;
+        Util.DelayedExecutionManager.ScheduleAction(() => { transform.position = rewindPosition; }, RewindDelay);
     }
 }
