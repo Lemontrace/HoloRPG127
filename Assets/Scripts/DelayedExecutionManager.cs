@@ -8,7 +8,7 @@ public class DelayedExecutionManager : MonoBehaviour
     private int LastId = 0;
     internal class ActionInfo
     {
-        internal int Id;
+        internal readonly int Id;
         internal readonly ActionDelegate Action;
         internal float Delay;
 
@@ -35,7 +35,7 @@ public class DelayedExecutionManager : MonoBehaviour
             action.Delay -= Time.deltaTime;
             if (action.Delay <= 0)
             {
-                action.Action.Invoke();
+                action.Action();
                 AllActions.RemoveAt(i);
             }
         }
@@ -43,7 +43,8 @@ public class DelayedExecutionManager : MonoBehaviour
 
     public int ScheduleAction(ActionDelegate action, float delay)
     {
-        AllActions.Add(new ActionInfo(++LastId, action, delay));
+        AllActions.Add(new ActionInfo(LastId + 1, action, delay));
+        LastId = (LastId + 1)%int.MaxValue;
         return LastId;
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class AmeSkills : MonoBehaviour
 {
 
-    public GameObject BulletPrefab;
+    [SerializeReference] GameObject BulletPrefab;
     int BulletCount = 20;
     float BulletSpread = 30; //spread in degrees
     float BulletSpeed = 15;
@@ -17,7 +17,7 @@ public class AmeSkills : MonoBehaviour
     float GroundPoundRadious = 2f;
     float GroundPoundDelay = 1f;
 
-    LinkedList<Vector3> PastPositions = new LinkedList<Vector3>();
+    private LinkedList<Vector3> PastPositions = new LinkedList<Vector3>();
     private float PositionRecordTimer = 0.0f;
     float RewindDelay = 1.5f;
     float RewindResolution = 0.1f;
