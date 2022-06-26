@@ -8,7 +8,7 @@ public class LinearBullet : MonoBehaviour
     public float Speed;
     public Vector3 Direction;
     public float Range;
-    private float distance;
+    private float distance = 0;
     public float Damage;
 
     void FixedUpdate()

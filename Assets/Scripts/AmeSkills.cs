@@ -6,6 +6,7 @@ using UnityEngine;
 public class AmeSkills : MonoBehaviour
 {
 
+    [SerializeReference] GameObject BulletPrefab;
     int BulletCount = 20;
     float BulletSpread = 30; //spread in degrees
     float BulletSpeed = 15;
@@ -16,13 +17,11 @@ public class AmeSkills : MonoBehaviour
     float GroundPoundRadious = 2f;
     float GroundPoundDelay = 1f;
 
-    LinkedList<Vector3> PastPositions = new LinkedList<Vector3>();
+    private LinkedList<Vector3> PastPositions = new LinkedList<Vector3>();
     private float PositionRecordTimer = 0.0f;
     float RewindDelay = 1.5f;
     float RewindResolution = 0.1f;
     float RewindLength = 3f;
-
-    public GameObject BulletPrefab;
 
     float Skill1CoolDown = 1f;
     private float Skill1Timer = 0f;
@@ -108,16 +107,14 @@ public class AmeSkills : MonoBehaviour
     void GroundPound()
     {
         //TODO : play ground pound animation
-        
-        Invoke(nameof(GroundPound_0), GroundPoundDelay);
-    }
-    void GroundPound_0()
-    {
-        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), GroundPoundRadious);
-        foreach (var obj in objectsInRange)
+        Util.DelayedExecutionManager.ScheduleAction(() =>
         {
-            if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().Damage(GroundPoundDamage);
-        }
+            Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), GroundPoundRadious);
+            foreach (var obj in objectsInRange)
+            {
+                if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().Damage(GroundPoundDamage);
+            }
+        }, GroundPoundDelay);
     }
 
 
@@ -128,21 +125,13 @@ public class AmeSkills : MonoBehaviour
         PastPositions.RemoveFirst();
     }
 
-    private Vector3 RewindPosition;
-
     void Rewind()
     {
         //make the character unable to move during animation
         GetComponent<EffectHandler>().AddEffect(new Effect.Stun(RewindDelay));
         //save rewind position
-        RewindPosition = PastPositions.First.Value;
+        Vector3 rewindPosition = PastPositions.First.Value;
         //TODO : start rewind animation
-        
-        Invoke(nameof(Rewind_0), RewindDelay);
-    }
-
-    void Rewind_0()
-    {
-        transform.position = RewindPosition;
+        Util.DelayedExecutionManager.ScheduleAction(() => { transform.position = rewindPosition; }, RewindDelay);
     }
 }

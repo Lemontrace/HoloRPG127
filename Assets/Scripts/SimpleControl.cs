@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimpleControl : MonoBehaviour
 {
 
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         float v = Input.GetAxisRaw("Vertical");
