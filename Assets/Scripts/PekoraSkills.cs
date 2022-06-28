@@ -33,7 +33,7 @@ public class PekoraSkills : MonoBehaviour
         DecreaseTimers();
 
         //invoke skill 1
-        if (Input.GetButtonDown("Skill1") && Skill1Timer <= 0)
+        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
         {
             Skill1Timer = Skill1CoolDown;
             CarrotThrow();

@@ -7,5 +7,5 @@ public static class Util
     public static DelayedExecutionManager DelayedExecutionManager
         => GameObject.Find("Managers").GetComponent<DelayedExecutionManager>();
 
-    public const float TileSize = 1.77f;
+    public const float TileSize = 1.2058f;
 }
