@@ -49,7 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd920aa2e4623c48ad658fbc405e874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LaserPrefab: {fileID: 8455757110927451384, guid: 26b78e43e45cd694f9dfadc19c0527ca, type: 3}
   CubePrefab: {fileID: 25481836769503538, guid: 3abe9c2a7291807428a0f8efbca4a548, type: 3}
+  SnowstormPrefab: {fileID: 7984732500036696827, guid: a6d01e09ce3885447ba20421da99f008, type: 3}
 --- !u!114 &8025600077832345585
 MonoBehaviour:
   m_ObjectHideFlags: 0

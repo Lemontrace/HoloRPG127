@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimpleControl : MonoBehaviour
 {
     
-    float InterpolationFactor = 0.5f;
+    float InterpolationFactor = 0.3f;
     float Dead = 0.1f;
 
     void FixedUpdate()
@@ -17,7 +17,7 @@ public class SimpleControl : MonoBehaviour
         if (Mathf.Abs(v) <Dead && Mathf.Abs(h) < Dead) return;
         //interpolate between input and current direction
         Vector3 InputVector = new Vector3(h, v, 0).normalized;
-        Vector3 MovementDirection = Vector3.Slerp(InputVector, GetComponent<Generic>().Facing, InterpolationFactor);
+        Vector3 MovementDirection = Vector3.Lerp(InputVector, GetComponent<Generic>().Facing, InterpolationFactor);
         MovementDirection.Normalize();
         Vector3 movement = GetComponent<Generic>().MovementSpeed * Time.deltaTime * MovementDirection;
         GetComponent<Generic>().Facing = MovementDirection;
