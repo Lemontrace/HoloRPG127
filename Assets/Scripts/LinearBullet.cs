@@ -10,6 +10,7 @@ public class LinearBullet : MonoBehaviour
     public float Range;
     private float distance = 0;
     public float Damage;
+    public bool Piercing = false;
 
     void FixedUpdate()
     {
@@ -27,7 +28,7 @@ public class LinearBullet : MonoBehaviour
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Generic>().Damage(Damage);
-            Destroy(gameObject);
+            if (!Piercing) Destroy(gameObject);
         }
     }
 

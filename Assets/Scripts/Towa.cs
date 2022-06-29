@@ -18,10 +18,14 @@ public class Towa : MonoBehaviour
 
 
     float CubeSpinRadious = Util.TileSize * 0.75f;
-    float CubeSpinAngularVelocity = 45;
     float CubeDamage = 50;
 
     bool DevilForm = false;
+
+    float UltDuration = 10;
+    float UltSlowAmount = 30;
+    float UltRadious = 2;
+    List<GameObject> EnemiesInUltRange;
 
 
     float Skill1CoolDown = 1f;
@@ -30,13 +34,12 @@ public class Towa : MonoBehaviour
     float Skill2CoolDown = 0f;
     private float Skill2Timer = 0f;
 
-    float Skill3CoolDown = 35f;
+    float Skill3CoolDown = 40f;
     private float Skill3Timer = 0f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        EnemiesInUltRange = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -64,10 +67,10 @@ public class Towa : MonoBehaviour
         if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
         {
             Skill3Timer = Skill3CoolDown;
-            //Rewind();
+            Ult();
         }
 
-
+        //slow down enemy when towa's in devilform
     }
     void DecreaseTimers()
     {
@@ -76,6 +79,7 @@ public class Towa : MonoBehaviour
         Skill3Timer -= Time.deltaTime;
     }
 
+    //summon cubes that fly towards nearest enemy after brief delay
     void SummonCubes()
     {
         Vector3 center = transform.position;
@@ -92,8 +96,30 @@ public class Towa : MonoBehaviour
             towaCube.Radious = CubeSpinRadious;
             towaCube.ScaleY = 0.8f;
             towaCube.Angle = angle;
-            towaCube.AngularVelocity = CubeSpinAngularVelocity;
             towaCube.Damage = CubeDamage;
         }
+    }
+
+    void Ult()
+    {
+        //set DevilForm to true and then UltDuration seconds later, false
+        DevilForm = true;
+        Util.DelayedExecutionManager.ScheduleAction(() => DevilForm = false, UltDuration);
+
+        void action()
+        {
+            var center = transform.position;
+            center.y -= 0.5f * Util.TileSize;
+            var colliders = Physics2D.OverlapCircleAll(new Vector2(center.x, center.y), UltRadious);
+            foreach (var collider in colliders)
+            {
+                if (!collider.gameObject.CompareTag("Enemy")) continue;
+                collider.GetComponent<EffectHandler>().AddEffect(new Effect.SpeedMuliplier(0.1f, 1 - UltSlowAmount / 100));
+            }
+            if (DevilForm) Util.DelayedExecutionManager.ScheduleAction(() => { if (DevilForm) action(); }, 0.1f);
+        }
+
+
+        action();
     }
 }

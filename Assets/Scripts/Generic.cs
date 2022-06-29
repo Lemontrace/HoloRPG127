@@ -15,7 +15,7 @@ public class Generic : MonoBehaviour
 
     private EffectHandler effectHandler;
 
-    public Vector3 Facing;
+    public Vector3 Facing = Vector3.right;
 
     public float MaxHitPoint;
 

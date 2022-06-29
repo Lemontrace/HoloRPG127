@@ -7,7 +7,7 @@ public class PekoraSkills : MonoBehaviour
 {
     [SerializeReference] GameObject CarrotPrefab;
     float CarrotThrowSpeed = 15;
-    float CarrotThrowRange = 15;
+    float CarrotThrowRange = Util.TileSize * 5;
     float CarrotThrowDamage = 50;
 
     float CarrotHammerDamage = 50;
@@ -68,10 +68,13 @@ public class PekoraSkills : MonoBehaviour
             Quaternion.FromToRotation(Vector3.right, GetComponent<Generic>().Facing));
 
         //set its speed, damage, range, and direction
-        carrot.GetComponent<LinearBullet>().Speed = CarrotThrowSpeed;
-        carrot.GetComponent<LinearBullet>().Damage = CarrotThrowDamage;
-        carrot.GetComponent<LinearBullet>().Direction = GetComponent<Generic>().Facing;
-        carrot.GetComponent<LinearBullet>().Range = CarrotThrowRange;
+        var bulletComponent = carrot.GetComponent<LinearBullet>();
+        bulletComponent.Speed = CarrotThrowSpeed;
+        bulletComponent.Damage = CarrotThrowDamage;
+        bulletComponent.Direction = GetComponent<Generic>().Facing;
+        bulletComponent.Range = CarrotThrowRange;
+        bulletComponent.Piercing = true;
+        
     }
 
     void CarrotHammer()

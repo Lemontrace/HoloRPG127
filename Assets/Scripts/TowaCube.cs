@@ -14,10 +14,11 @@ public class TowaCube : MonoBehaviour
     public float Radious;
     public float ScaleY;
     public float Angle;
-    public float AngularVelocity;
     public float Damage;
 
-    float SpinTimer = 1;
+
+    float AngularVelocity = 180;
+    float SpinTimer = 1.5f;
 
     GameObject SeekTarget;
     float SeekRadious = Util.TileSize * 5;
@@ -43,16 +44,20 @@ public class TowaCube : MonoBehaviour
 
     void UpdateOnSpin()
     {
+        //calculate cube's rotation
         Angle += AngularVelocity * Time.deltaTime;
         Angle %= 360;
+        //make sure cube's rendered correctly
         if (Angle > 180) GetComponent<SpriteRenderer>().sortingOrder = 1;
         else GetComponent<SpriteRenderer>().sortingOrder = -1;
+        //apply cube's rotation
         var posOffset = Quaternion.Euler(0, 0, Angle) * Vector3.right * Radious;
         posOffset.y *= ScaleY;
         transform.position = SpinCenter.transform.position + posOffset;
 
+
         SpinTimer -= Time.deltaTime;
-        if (SpinTimer <= 0)
+        if (SpinTimer <= 0) //set seek target and change phase
         {
             var center = SpinCenter.transform.position;
             var colliders = Physics2D.OverlapCircleAll(new Vector2(center.x, center.y), SeekRadious);
