@@ -65,9 +65,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Facing: {x: 0, y: 0, z: 0}
-  MaxHitPoint: 0
-  HitPoint: 0
-  BaseDefence: 0
+  MaxHitPoint: 800
+  HitPoint: 800
+  BaseDefence: 8
   BaseMovementSpeed: 2
 --- !u!114 &8025600077832345584
 MonoBehaviour:

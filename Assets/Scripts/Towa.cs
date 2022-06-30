@@ -76,7 +76,7 @@ public class Towa : MonoBehaviour
     {
         var facing = GetComponent<Generic>().Facing;
 
-        var position = transform.position + facing * (LaserReach / 2);
+        var position = transform.position + facing * ((LaserReach / 2) + Util.TileSize * 0.5f);
         var rotation = Quaternion.FromToRotation(Vector3.right, facing);
 
         var LaserSprite = Instantiate(LaserPrefab, position, rotation);
@@ -87,7 +87,6 @@ public class Towa : MonoBehaviour
         {
             if (!collider.gameObject.CompareTag("Enemy")) continue;
             collider.GetComponent<EffectHandler>().AddEffect(new Effect.SpeedMuliplier(1f, 1 - LaserSlowAmount / 100));
-            collider.GetComponent<Generic>().Damage(10);
         }
     }
 

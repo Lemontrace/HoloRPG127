@@ -43,7 +43,7 @@ public class Generic : MonoBehaviour
 
             float value = BaseMovementSpeed;
             foreach (var effect in effectHandler.AllEffects)
-                if (effect is Effect.SpeedMuliplier) value *= ((Effect.SpeedMuliplier)effect).Amount;
+                if (effect is Effect.SpeedMuliplier muliplier) value *= muliplier.Amount;
             return value;
         }
     }
