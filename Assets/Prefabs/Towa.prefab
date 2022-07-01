@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8025600077832345589}
   - component: {fileID: 8025600077832345582}
   m_Layer: 0
-  m_Name: towatowatowa
+  m_Name: Towa
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
