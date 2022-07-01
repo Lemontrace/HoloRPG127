@@ -61,10 +61,8 @@ public class Pekora : MonoBehaviour
         Skill3Timer -= Time.deltaTime;
     }
 
-    void CarrotThrow()
-    {
+    void CarrotThrow() =>
         Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage, CarrotThrowSpeed, CarrotThrowRange, true);
-    }
 
     void CarrotHammer()
     {
