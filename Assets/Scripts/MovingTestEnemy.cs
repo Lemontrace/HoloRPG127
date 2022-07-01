@@ -34,7 +34,7 @@ public class MovingTestEnemy : MonoBehaviour
         GetComponent<Generic>().OnHit += (damage) =>
         {
             GetComponent<SpriteRenderer>().color = Color.red;
-            Util.DelayedExecutionManager.ScheduleAction(() => { GetComponent<SpriteRenderer>().color = Color.white; }, 0.5f);
+            Util.DelayedExecutionManager.ScheduleAction(() => { GetComponent<SpriteRenderer>().color = Color.white; }, 0.2f);
         };
     }
 }

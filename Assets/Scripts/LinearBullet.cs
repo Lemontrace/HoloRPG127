@@ -24,11 +24,13 @@ public class LinearBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
+            return;
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Generic>().Damage(Damage);
             if (!Piercing) Destroy(gameObject);
+            return;
         }
     }
 
