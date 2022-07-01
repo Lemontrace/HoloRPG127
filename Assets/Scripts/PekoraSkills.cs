@@ -7,7 +7,7 @@ public class PekoraSkills : MonoBehaviour
 {
     [SerializeReference] GameObject CarrotPrefab;
     float CarrotThrowSpeed = 15;
-    float CarrotThrowRange = 15;
+    float CarrotThrowRange = Util.TileSize * 5;
     float CarrotThrowDamage = 50;
 
     float CarrotHammerDamage = 50;
@@ -33,7 +33,7 @@ public class PekoraSkills : MonoBehaviour
         DecreaseTimers();
 
         //invoke skill 1
-        if (Input.GetButtonDown("Skill1") && Skill1Timer <= 0)
+        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
         {
             Skill1Timer = Skill1CoolDown;
             CarrotThrow();
@@ -63,15 +63,7 @@ public class PekoraSkills : MonoBehaviour
 
     void CarrotThrow()
     {
-        //instantiate carrot
-        GameObject carrot = Instantiate(CarrotPrefab, transform.position,
-            Quaternion.FromToRotation(Vector3.right, GetComponent<Generic>().Facing));
-
-        //set its speed, damage, range, and direction
-        carrot.GetComponent<LinearBullet>().Speed = CarrotThrowSpeed;
-        carrot.GetComponent<LinearBullet>().Damage = CarrotThrowDamage;
-        carrot.GetComponent<LinearBullet>().Direction = GetComponent<Generic>().Facing;
-        carrot.GetComponent<LinearBullet>().Range = CarrotThrowRange;
+        Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage, CarrotThrowSpeed, CarrotThrowRange, true);        
     }
 
     void CarrotHammer()

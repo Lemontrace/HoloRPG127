@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5485623232266731779}
   - component: {fileID: -6421732973359793109}
   - component: {fileID: 8896402166052829845}
+  - component: {fileID: 100550051578704549}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 90
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 85afb9c07414f3d418d0cd487325c6f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,6 +101,7 @@ MonoBehaviour:
   Direction: {x: 0, y: 0, z: 0}
   Range: 0
   Damage: 0
+  Piercing: 0
 --- !u!70 &8896402166052829845
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -116,3 +118,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.95, y: 0.28}
   m_Direction: 1
+--- !u!50 &100550051578704549
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590649044576056463}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

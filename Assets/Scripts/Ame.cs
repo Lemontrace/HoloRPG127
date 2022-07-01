@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmeSkills : MonoBehaviour
+public class Ame : MonoBehaviour
 {
 
     [SerializeReference] GameObject BulletPrefab;
@@ -38,7 +38,7 @@ public class AmeSkills : MonoBehaviour
 
 
         //initialize PastPositions
-        for(int i=0;i<RewindLength/RewindResolution;i++)PastPositions.AddLast(transform.position);
+        for (int i = 0; i < RewindLength / RewindResolution; i++) PastPositions.AddLast(transform.position);
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class AmeSkills : MonoBehaviour
 
 
         //invoke skill 1
-        if (Input.GetButtonDown("Skill1") && Skill1Timer <= 0)
+        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
         {
             Skill1Timer = Skill1CoolDown;
             Shoot();

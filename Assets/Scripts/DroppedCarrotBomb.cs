@@ -23,7 +23,7 @@ public class DroppedCarrotBomb : MonoBehaviour
         var colliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), ExplosionRadious);
         foreach (var collider in colliders)
         {
-            if (collider.gameObject.CompareTag("Enemy")||collider.gameObject.CompareTag("player"))
+            if (collider.gameObject.CompareTag("Enemy"))
             {
                 collider.gameObject.GetComponent<Generic>().Damage(ExplosionDamage);
             }
