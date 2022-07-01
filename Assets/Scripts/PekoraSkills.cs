@@ -63,18 +63,7 @@ public class PekoraSkills : MonoBehaviour
 
     void CarrotThrow()
     {
-        //instantiate carrot
-        GameObject carrot = Instantiate(CarrotPrefab, transform.position,
-            Quaternion.FromToRotation(Vector3.right, GetComponent<Generic>().Facing));
-
-        //set its speed, damage, range, and direction
-        var bulletComponent = carrot.GetComponent<LinearBullet>();
-        bulletComponent.Speed = CarrotThrowSpeed;
-        bulletComponent.Damage = CarrotThrowDamage;
-        bulletComponent.Direction = GetComponent<Generic>().Facing;
-        bulletComponent.Range = CarrotThrowRange;
-        bulletComponent.Piercing = true;
-        
+        Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage, CarrotThrowSpeed, CarrotThrowRange, true);        
     }
 
     void CarrotHammer()
