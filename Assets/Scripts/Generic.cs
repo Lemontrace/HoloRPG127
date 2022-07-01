@@ -57,11 +57,16 @@ public class Generic : MonoBehaviour
     }
 
 
-    public void Damage(float amount)
+    public float Damage(float amount)
     {
-        HitPoint -= amount * (100 - Defence) / 100;
-        OnHit?.Invoke(amount * (100 - Defence) / 100);
+        float damage;
+        if (effectHandler.AllEffects.Exists((effect) => effect is Effect.Invincibility)) damage = 0;
+        else damage = amount * (100 - Defence) / 100;
+
+        HitPoint -= damage;
+        OnHit?.Invoke(damage);
         if (HitPoint <= 0) OnZeroHP?.Invoke();
+        return damage;
     }
 
     public void Heal(float amount)
