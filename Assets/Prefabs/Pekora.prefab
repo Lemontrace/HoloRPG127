@@ -97,7 +97,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6012671387360587289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7544a60feebf6f4ab995c52f8519f2f, type: 3}
+  m_Script: {fileID: 11500000, guid: a233d1dca7639044bb3c0a956f952374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CarrotPrefab: {fileID: 2590649044576056463, guid: 4b51847bd6b00614b88cb05b17ae1094, type: 3}
