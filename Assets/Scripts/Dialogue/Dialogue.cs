@@ -7,6 +7,7 @@ public class Dialogue
     public string name;
     public LocalizedString localizedString;
     private string localizedText;
+    public Sprite portraitSprite = null;
 
     public void OnEnable()
     {

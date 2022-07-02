@@ -26,6 +26,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 8848bbe14ab2ba747b81a15c3927d071, type: 3}
   - name: Ame
     localizedString:
       m_TableReference:
@@ -36,6 +37,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 477278fdb4b37784a9e5df1ed15958f4, type: 3}
   - name: Ina
     localizedString:
       m_TableReference:
@@ -46,6 +48,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 8848bbe14ab2ba747b81a15c3927d071, type: 3}
   - name: Ame
     localizedString:
       m_TableReference:
@@ -56,6 +59,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 477278fdb4b37784a9e5df1ed15958f4, type: 3}
   - name: Ina
     localizedString:
       m_TableReference:
@@ -66,6 +70,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 8848bbe14ab2ba747b81a15c3927d071, type: 3}
   - name: Ame
     localizedString:
       m_TableReference:
@@ -76,6 +81,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 477278fdb4b37784a9e5df1ed15958f4, type: 3}
   - name: Ina
     localizedString:
       m_TableReference:
@@ -86,6 +92,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 8848bbe14ab2ba747b81a15c3927d071, type: 3}
   - name: Ame
     localizedString:
       m_TableReference:
@@ -96,5 +103,6 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    portraitSprite: {fileID: 21300000, guid: 477278fdb4b37784a9e5df1ed15958f4, type: 3}
   references:
     version: 1
