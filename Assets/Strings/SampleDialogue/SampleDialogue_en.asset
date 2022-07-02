@@ -19,19 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 32029265920
-    m_Localized: ame line 1 english
+    m_Localized: What did the ocean say to the other ocean?
     m_Metadata:
       m_Items: []
   - m_Id: 35783168000
-    m_Localized: ame line 2 english
+    m_Localized: What?
     m_Metadata:
       m_Items: []
   - m_Id: 39679676416
-    m_Localized: ina line 1 english
+    m_Localized: Nothing. They just waved.
     m_Metadata:
       m_Items: []
   - m_Id: 486790504370176
-    m_Localized: ame line 3 english
+    m_Localized: Oh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321070314475520
+    m_Localized: Oh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321064564084736
+    m_Localized: Do you sea what I did there?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321072482930688
+    m_Localized: I'm shore you did.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321124219670528
+    m_Localized: INAFF!!!
     m_Metadata:
       m_Items: []
   references:

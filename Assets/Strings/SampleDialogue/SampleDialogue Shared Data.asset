@@ -16,19 +16,35 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 7b52e4e208cb5354db4e9d41f7b23d47
   m_Entries:
   - m_Id: 32029265920
-    m_Key: AME_LINE1
+    m_Key: SAMPLE_CONVERSATION_1
     m_Metadata:
       m_Items: []
   - m_Id: 35783168000
-    m_Key: AME_LINE2
+    m_Key: SAMPLE_CONVERSATION_2
     m_Metadata:
       m_Items: []
   - m_Id: 39679676416
-    m_Key: INA_LINE1
+    m_Key: SAMPLE_CONVERSATION_3
     m_Metadata:
       m_Items: []
   - m_Id: 486790504370176
-    m_Key: AME_LINE3
+    m_Key: SAMPLE_CONVERSATION_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321064564084736
+    m_Key: SAMPLE_CONVERSATION_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321070314475520
+    m_Key: SAMPLE_CONVERSATION_6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321072482930688
+    m_Key: SAMPLE_CONVERSATION_7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2321124219670528
+    m_Key: SAMPLE_CONVERSATION_8
     m_Metadata:
       m_Items: []
   m_Metadata:

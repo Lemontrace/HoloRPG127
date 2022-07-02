@@ -175,12 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d629a60719adfaf4bb3d676d980c5bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    localizedStringTable:
-      m_TableReference:
-        m_TableCollectionName: GUID:7b52e4e208cb5354db4e9d41f7b23d47
-    name: 
-    localizedText: 
+  dialogueSO: {fileID: 11400000, guid: ae28419d9c3fd824f871413844f1ad5a, type: 2}
 --- !u!114 &268481217
 MonoBehaviour:
   m_ObjectHideFlags: 0

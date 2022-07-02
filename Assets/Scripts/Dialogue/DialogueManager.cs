@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -8,37 +9,54 @@ public class DialogueManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
 
-    private Queue<(string, string)> sentences;
+    private DialogueSO dialogueSO;
+    private Queue<Dialogue> dialogues;
 
     void Start()
     {
-        sentences = new Queue<(string, string)>();
+        dialogues = new Queue<Dialogue>();
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(DialogueSO dialogueSO)
     {
-        sentences.Clear();
+        this.dialogueSO = dialogueSO;
+        dialogues.Clear();
 
-        foreach ((string, string) sentence in dialogue.sentences)
+        foreach (Dialogue dialogue in dialogueSO.dialogues)
         {
-            sentences.Enqueue(sentence);
+            dialogues.Enqueue(dialogue);
         }
 
         DisplayNextSentence();
     }
 
+    public void EndDialogue()
+    {
+        if (!dialogueSO) return;
+
+        foreach (Dialogue dialogue in dialogueSO.dialogues)
+        {
+            dialogue.OnDisable();
+        }
+        dialogueSO = null;
+        nameText.text = "";
+        dialogueText.text = "End of Dialogue";
+    }
+
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (dialogues.Count == 0)
         {
+            EndDialogue();
             return;
         }
 
         StopAllCoroutines();
 
-        (string key, string text) sentence = sentences.Dequeue();
-        nameText.text = sentence.key;
-        StartCoroutine(TypeSentence(sentence.text));
+        Dialogue dialogue = dialogues.Dequeue();
+        dialogue.OnEnable();
+        nameText.text = dialogue.name;
+        StartCoroutine(TypeSentence(dialogue.GetLocalizedText()));
     }
 
     IEnumerator TypeSentence(string sentence)
