@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeDrainAttack : MonoBehaviour
+public class DeadbeatsUltiAttack : MonoBehaviour
 {
-
     float timer = 0f;
+    [SerializeField] GameObject deadbeatsPrefab;
     List<Collider2D> listOfEnemies = new List<Collider2D>();
 
     private void Update()
@@ -13,11 +13,27 @@ public class LifeDrainAttack : MonoBehaviour
         if (timer < 5f)
             timer += Time.deltaTime;
         else
+        {
+            InstantiateDeadbeatsMinions();
             Destroy(gameObject);
+        }
+       
+    }
 
+    // Wait for 5 seconds, then deadbeats minions will appear
+    void InstantiateDeadbeatsMinions()
+    {
         for (int i = 0; i < listOfEnemies.Count; i++)
         {
-            listOfEnemies[i].gameObject.name = "Life Drain! " + Random.Range(0,5);
+            if (listOfEnemies[i] == null)
+                continue;
+
+            foreach (var item in listOfEnemies)
+            {
+                var g = Instantiate(deadbeatsPrefab, item.transform);
+                // Do attack to enemies
+                Destroy(g, 2f);
+            }
         }
     }
 

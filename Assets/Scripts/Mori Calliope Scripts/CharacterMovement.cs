@@ -8,16 +8,20 @@ public class CharacterMovement : MonoBehaviour
 
     Vector2 direction;
     Rigidbody2D rb;
+    float z = 0;
     public float directionIndex = 1;
     [SerializeField] GameObject scythePrefab;
     [SerializeField] GameObject lifeDrainPrefab;
-    float z = 0;
+    [SerializeField] GameObject deadBeatsUltsPrefab;
     [SerializeField] float skill1Timer = 0f;
     [SerializeField] float skill2Timer = 0f;
+    [SerializeField] float skill3Timer = 0f;
     float skill1Counter = 0f;
     float skill2Counter = 0f;
+    float skill3Counter = 0f;
     bool canUseSkill1 = true;
     bool canUseSkill2 = true;
+    bool canUseSkill3 = true;
 
     private void Awake()
     {
@@ -48,10 +52,16 @@ public class CharacterMovement : MonoBehaviour
             canUseSkill2 = false;
             skill2Counter = 0f;
         }
+        if(Input.GetKeyDown(KeyCode.C) && canUseSkill3)
+        {
+            Instantiate(deadBeatsUltsPrefab, transform);
+            canUseSkill3 = false;
+            skill3Counter = 0f;
+        }
 
         CoolDownSkill1();
         CoolDownSkill2();
-
+        CoolDownSkill3();
     }
 
     void CoolDownSkill1()
@@ -82,6 +92,22 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             skill2Counter = skill2Timer;
+            canUseSkill2 = true;
+        }
+    }
+
+    void CoolDownSkill3()
+    {
+        if (canUseSkill3)
+            return;
+
+        if (skill3Counter < skill3Timer)
+        {
+            skill3Counter += Time.deltaTime;
+        }
+        else
+        {
+            skill3Counter = skill3Timer;
             canUseSkill2 = true;
         }
     }

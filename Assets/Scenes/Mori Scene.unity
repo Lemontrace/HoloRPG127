@@ -5277,7 +5277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446682281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 0.86, z: 0}
+  m_LocalPosition: {x: 1.2, y: 1.43, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5427,7 +5427,7 @@ GameObject:
   - component: {fileID: 2040752862}
   - component: {fileID: 2040752863}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Mori Calliope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5473,12 +5473,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f4c140028288bd9449a946d637ee440d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2772114dc7004346a1139c9c8c15f58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.9, y: 2.9}
+  m_Size: {x: 0.8, y: 2.0951407}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5493,7 +5493,7 @@ Transform:
   m_GameObject: {fileID: 2040752859}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.19, y: 0.35, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -5534,5 +5534,7 @@ MonoBehaviour:
   directionIndex: 1
   scythePrefab: {fileID: 668371725859447435, guid: 1fa9ff028fd15be4aa9dbd41c4a001d2, type: 3}
   lifeDrainPrefab: {fileID: 4425910406924298824, guid: 98558a681bd768745a34cdf9073271f8, type: 3}
+  deadBeatsUltsPrefab: {fileID: 7094289403378128711, guid: f9212b7dc20b37f40b48a6bfe7e519db, type: 3}
   skill1Timer: 2
   skill2Timer: 4
+  skill3Timer: 4

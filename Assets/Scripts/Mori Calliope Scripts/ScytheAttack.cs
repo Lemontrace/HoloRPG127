@@ -39,6 +39,9 @@ public class ScytheAttack : MonoBehaviour
 
             for (int i = 0; i < listOfEnemies.Count; i++)
             {
+                if (listOfEnemies[i] == null)
+                    continue;
+
                 if (attackedEnemies.Contains(listOfEnemies[i]))
                     continue;
 
