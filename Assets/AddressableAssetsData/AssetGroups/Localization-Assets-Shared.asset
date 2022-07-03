@@ -21,6 +21,10 @@ MonoBehaviour:
     m_Address: Assets/Strings/CharacterLines Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 7b52e4e208cb5354db4e9d41f7b23d47
+    m_Address: Assets/Strings/SampleDialogue/SampleDialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ec0406b3e3a37264bb38525069f7181e, type: 2}
   m_SchemaSet:
