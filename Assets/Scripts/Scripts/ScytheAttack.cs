@@ -45,7 +45,7 @@ public class ScytheAttack : MonoBehaviour
                 else
                 {
                     attackedEnemies.Add(collision);
-                    attackedEnemies[i].gameObject.name = "Enemy Hit";
+                    attackedEnemies[i].gameObject.name = "Enemy Hit " + Random.Range(0,20);
                     //foreach (var enemy in collision.GetComponents<IEnemy>())
                     //    enemy.EnemyAttacked();
 
