@@ -91,6 +91,8 @@ public class Fubuki : MonoBehaviour
         Skill3Timer -= Time.deltaTime;
     }
 
+    private float DamageBuff => GetComponent<Generic>().DamageBuff;
+
     void BasicAttack()
     {
         void Attack()
@@ -104,9 +106,12 @@ public class Fubuki : MonoBehaviour
             foreach (var collider in colliders)
             {
                 if (!collider.gameObject.CompareTag("Enemy")) continue;
-                collider.GetComponent<Generic>().Damage(BasicAttackDamage);
+                var damage = BasicAttackDamage + DamageBuff / 2;
+                if (Buffed) damage *= BuffDamageMultiplier;
+                collider.GetComponent<Generic>().Damage(damage);
             }
         }
+
         Attack();
         Util.DelayedExecutionManager.ScheduleAction(Attack, 0.6f);
     }
@@ -140,7 +145,7 @@ public class Fubuki : MonoBehaviour
             swordAura.Direction = facing;
             swordAura.Speed = SwordAuraSpeed;
 
-            var damage = SwordAuraDamage;
+            var damage = SwordAuraDamage + DamageBuff;
             if (Buffed) damage *= BuffDamageMultiplier;
             swordAura.Damage = damage;
             swordAura.Range = SwordAuraReach;

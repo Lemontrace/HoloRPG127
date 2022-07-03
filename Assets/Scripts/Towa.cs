@@ -71,6 +71,8 @@ public class Towa : MonoBehaviour
         Skill3Timer -= Time.deltaTime;
     }
 
+    private float DamageBuff => GetComponent<Generic>().DamageBuff;
+
     //Shoots Laser in a direction, slowing all enemies on path
     void Laser()
     {
@@ -93,9 +95,10 @@ public class Towa : MonoBehaviour
     //summon cubes that fly towards nearest enemy after brief delay
     void SummonCubes()
     {
-        Vector3 center = transform.position;
         int cubeCount;
         if (DevilForm) cubeCount = 5; else cubeCount = 4;
+
+        Vector3 center = transform.position;
         var angleOffset = 45;
         for (int i = 0; i < cubeCount; i++)
         {
@@ -107,7 +110,7 @@ public class Towa : MonoBehaviour
             towaCube.Radious = CubeSpinRadious;
             towaCube.ScaleY = 0.8f;
             towaCube.Angle = angle;
-            towaCube.Damage = CubeDamage;
+            towaCube.Damage = CubeDamage + DamageBuff/cubeCount;
         }
     }
 
@@ -129,7 +132,7 @@ public class Towa : MonoBehaviour
 
 
         //slow down enemy when towa's in devilform
-        void action()
+        void applySlowRecursive()
         {
             var center = transform.position;
             center.y -= 0.5f * Util.TileSize;
@@ -140,9 +143,9 @@ public class Towa : MonoBehaviour
                 collider.GetComponent<EffectHandler>().AddEffect(new Effect.SpeedMuliplier(0.1f, 1 - UltSlowAmount / 100));
             }
             //re-apply slow every 0.1 seconds
-            if (DevilForm) Util.DelayedExecutionManager.ScheduleAction(() => { if (DevilForm) action(); }, 0.1f);
+            Util.DelayedExecutionManager.ScheduleAction(() => { if (DevilForm) applySlowRecursive(); }, 0.1f);
         }
 
-        action();
+        applySlowRecursive();
     }
 }

@@ -13,7 +13,7 @@ public class Chloe : MonoBehaviour
     float KnifeThrowRange = Util.TileSize * 6;
     float KnifeThrowDamage = 50f;
 
-    float AssasinationRadious = Util.TileSize * 6;
+    float AssassinationRadious = Util.TileSize * 6;
     float InvincibilityDuration = 1;
     float AssasinationDamage = 450;
     float AssasinationBleedDuration = 3;
@@ -59,10 +59,12 @@ public class Chloe : MonoBehaviour
         Skill3Timer -= Time.deltaTime;
     }
 
+    private float DamageBuff => GetComponent<Generic>().DamageBuff;
+
     void BasicAttack()
     {
         int numHit = 2;
-        if (Random.value < 1f / 3) ++numHit;
+        if (Random.value < 1f / 3) numHit++;
         Attack(); //1st hit
         Util.DelayedExecutionManager.ScheduleAction(Attack, 1f / numHit); //2nd hit
         if (numHit == 3) Util.DelayedExecutionManager.ScheduleAction(Attack, 2f / numHit); //3rd hit
@@ -72,7 +74,7 @@ public class Chloe : MonoBehaviour
             Vector3 facing = GetComponent<Generic>().Facing;
             Vector3 point = transform.position + facing * (BasicAttackReach / 2 + 0.5f * Util.TileSize);
             Quaternion rotation = Quaternion.FromToRotation(Vector3.right, facing);
-            float basicAttackDamage = BasicAttackDamage;
+            float basicAttackDamage = BasicAttackDamage + DamageBuff / numHit;
             var colliders = Physics2D.OverlapBoxAll(new Vector2(point.x, point.y),
                 new Vector2(BasicAttackWidth, BasicAttackReach), rotation.eulerAngles.z + 90f);
             foreach (var collider in colliders)
@@ -81,12 +83,13 @@ public class Chloe : MonoBehaviour
     }
 
     void KnifeThrow()
-        => Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowDamage, KnifeThrowSpeed, KnifeThrowRange, false);
+        => Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowDamage + DamageBuff, KnifeThrowSpeed, KnifeThrowRange, false);
 
     void Assasinate()
     {
+        //get furthest target in AssassinationRadious
         Vector3 position = transform.position;
-        var colliders = Physics2D.OverlapCircleAll(new Vector2(position.x, position.y), AssasinationRadious);
+        var colliders = Physics2D.OverlapCircleAll(new Vector2(position.x, position.y), AssassinationRadious);
         float maxDistance = float.NegativeInfinity;
         GameObject seekTarget = null;
         foreach (var collider in colliders)
@@ -99,17 +102,19 @@ public class Chloe : MonoBehaviour
                 maxDistance = distance;
                 seekTarget = collider.gameObject;
             }
-
-            if (seekTarget == null) return;
-
-            //teleport
-            transform.position = seekTarget.transform.position + 0.5f * Util.TileSize * GetComponent<Generic>().Facing;
-            //get invincivility
-            GetComponent<EffectHandler>().AddEffect(new Effect.Invincibility(InvincibilityDuration));
-            int bleedTimes = 3;
-            for (int i = 0; i < bleedTimes; i++)
-                Util.DelayedExecutionManager.ScheduleAction(() => seekTarget.GetComponent<Generic>().Damage(AssasinationDamage / bleedTimes),
-                    i * AssasinationBleedDuration / bleedTimes);
         }
+
+        if (seekTarget == null) return;
+
+        //teleport
+        transform.position = seekTarget.transform.position + 0.5f * Util.TileSize * GetComponent<Generic>().Facing;
+        //get invincivility
+        GetComponent<EffectHandler>().AddEffect(new Effect.Invincibility(InvincibilityDuration));
+        //apply bleeding effect
+        int bleedTimes = 3;
+        for (int i = 0; i < bleedTimes; i++)
+            Util.DelayedExecutionManager.ScheduleAction(
+                () => seekTarget.GetComponent<Generic>().Damage((AssasinationDamage + DamageBuff) / bleedTimes),
+                i * AssasinationBleedDuration / bleedTimes);
     }
 }
