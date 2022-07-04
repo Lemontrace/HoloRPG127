@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Towa : MonoBehaviour
+public class Towa : PlayableCharacter
 {
 
     [SerializeReference] GameObject LaserPrefab;
@@ -23,52 +23,16 @@ public class Towa : MonoBehaviour
     float UltDuration = 10;
     float UltSlowAmount = 30;
     float UltRadious = 2;
-    float CubeSKillCoolDownWhileUlt = 5f;
+    float Skill2CoolDownWhileUlt = 5f;
 
-
-    float Skill1CoolDown = 1f;
-    private float Skill1Timer = 0f;
-
-    float Skill2CoolDown = 8f;
-    private float Skill2Timer = 0f;
-
-    float Skill3CoolDown = 40f;
-    private float Skill3Timer = 0f;
-
-
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-
-        DecreaseTimers();
-
-
-        //invoke skill 1
-        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
-        {
-            Skill1Timer = Skill1CoolDown;
-            Laser();
-        }
-
-        //invoke skill 2
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
-        {
-            Skill2Timer = Skill2CoolDown;
-            SummonCubes();
-        }
-
-        //invoke skill 3
-        if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
-        {
-            Skill3Timer = Skill3CoolDown;
-            Ult();
-        }
-    }
-    void DecreaseTimers()
-    {
-        Skill1Timer -= Time.deltaTime;
-        Skill2Timer -= Time.deltaTime;
-        Skill3Timer -= Time.deltaTime;
+        Skill1 = Laser;
+        Skill1CoolDown = 1f;
+        Skill2 = SummonCubes;
+        Skill2CoolDown = 5f;
+        Skill3 = Ult;
+        Skill3CoolDown = 60f;
     }
 
     private float DamageBuff => GetComponent<Generic>().DamageBuff;
@@ -119,7 +83,7 @@ public class Towa : MonoBehaviour
         //set DevilForm to true and then UltDuration seconds later, false
         DevilForm = true;
         var originalCooldown = Skill2CoolDown;
-        Skill2CoolDown = CubeSKillCoolDownWhileUlt;
+        Skill2CoolDown = Skill2CoolDownWhileUlt;
         Skill2Timer = 0;
 
         var snowstormSprite  = Instantiate(SnowstormPrefab);
