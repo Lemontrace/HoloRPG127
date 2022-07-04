@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chloe : MonoBehaviour
+public class Chloe : PlayableCharacter
 {
     float BasicAttackReach = Util.TileSize * 1.5f;
     float BasicAttackWidth = Util.TileSize * 0.5f;
@@ -18,56 +18,25 @@ public class Chloe : MonoBehaviour
     float AssasinationDamage = 450;
     float AssasinationBleedDuration = 3;
 
-
-    float Skill1CoolDown = 1;
-    float Skill1Timer = 0;
-
-    float Skill2CoolDown = 5;
-    float Skill2Timer = 0;
-
-    float Skill3CoolDown = 75;
-    float Skill3Timer = 0;
-
-    private void Update()
+    private void Start()
     {
-        DecreaseTimers();
-
-        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
-        {
-            Skill1Timer = Skill1CoolDown;
-            BasicAttack();
-        }
-
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
-        {
-            Skill2Timer = Skill2CoolDown;
-            KnifeThrow();
-        }
-
-        if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
-        {
-            Skill3Timer = Skill3CoolDown;
-            Assasinate();
-        }
-
-    }
-
-    private void DecreaseTimers()
-    {
-        Skill1Timer -= Time.deltaTime;
-        Skill2Timer -= Time.deltaTime;
-        Skill3Timer -= Time.deltaTime;
+        Skill1 = BasicAttack;
+        Skill1CoolDown = 1;
+        Skill2 = KnifeThrow;
+        Skill2CoolDown = 5;
+        Skill3 = Assasinate;
+        Skill3CoolDown = 75;
     }
 
     void BasicAttack()
     {
         int numHit = 2;
         if (Random.value < 1f / 3) ++numHit;
-        Attack(); //1st hit
-        Util.DelayedExecutionManager.ScheduleAction(Attack, 1f / numHit); //2nd hit
-        if (numHit == 3) Util.DelayedExecutionManager.ScheduleAction(Attack, 2f / numHit); //3rd hit
+        SingleAttack(); //1st hit
+        Util.DelayedExecutionManager.ScheduleAction(SingleAttack, 1f / numHit); //2nd hit
+        if (numHit == 3) Util.DelayedExecutionManager.ScheduleAction(SingleAttack, 2f / numHit); //3rd hit
 
-        void Attack()
+        void SingleAttack()
         {
             Vector3 facing = GetComponent<Generic>().Facing;
             Vector3 point = transform.position + facing * (BasicAttackReach / 2 + 0.5f * Util.TileSize);
@@ -99,17 +68,17 @@ public class Chloe : MonoBehaviour
                 maxDistance = distance;
                 seekTarget = collider.gameObject;
             }
-
-            if (seekTarget == null) return;
-
-            //teleport
-            transform.position = seekTarget.transform.position + 0.5f * Util.TileSize * GetComponent<Generic>().Facing;
-            //get invincivility
-            GetComponent<EffectHandler>().AddEffect(new Effect.Invincibility(InvincibilityDuration));
-            int bleedTimes = 3;
-            for (int i = 0; i < bleedTimes; i++)
-                Util.DelayedExecutionManager.ScheduleAction(() => seekTarget.GetComponent<Generic>().Damage(AssasinationDamage / bleedTimes),
-                    i * AssasinationBleedDuration / bleedTimes);
         }
+
+        if (seekTarget == null) return;
+
+        //teleport
+        transform.position = seekTarget.transform.position + 0.5f * Util.TileSize * GetComponent<Generic>().Facing;
+        //get invincivility
+        GetComponent<EffectHandler>().AddEffect(new Effect.Invincibility(InvincibilityDuration));
+        int bleedTimes = 3;
+        for (int i = 0; i < bleedTimes; i++)
+            Util.DelayedExecutionManager.ScheduleAction(() => seekTarget.GetComponent<Generic>().Damage(AssasinationDamage / bleedTimes),
+                i * AssasinationBleedDuration / bleedTimes);
     }
 }
