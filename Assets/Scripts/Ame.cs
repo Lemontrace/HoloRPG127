@@ -57,8 +57,6 @@ public class Ame : PlayableCharacter
         PastPositions.RemoveFirst();
     }
 
-    private float DamageBuff => GetComponent<Generic>().DamageBuff;
-
     void Shoot()
     {
         for (int i = 0; i < BulletCount; i++)

@@ -31,8 +31,6 @@ public class Pekora : PlayableCharacter
         Skill3CoolDown = 50f;
     }
 
-    private float DamageBuff => GetComponent<Generic>().DamageBuff;
-
     void CarrotThrow() =>
         Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage + DamageBuff, CarrotThrowSpeed, CarrotThrowRange, true);
 

@@ -35,8 +35,6 @@ public class Towa : PlayableCharacter
         Skill3CoolDown = 60f;
     }
 
-    private float DamageBuff => GetComponent<Generic>().DamageBuff;
-
     //Shoots Laser in a direction, slowing all enemies on path
     void Laser()
     {

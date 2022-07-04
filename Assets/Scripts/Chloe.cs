@@ -28,8 +28,6 @@ public class Chloe : PlayableCharacter
         Skill3CoolDown = 75;
     }
 
-    private float DamageBuff => GetComponent<Generic>().DamageBuff;
-
     void BasicAttack()
     {
         int numHit = 2;

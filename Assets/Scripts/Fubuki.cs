@@ -55,8 +55,6 @@ public class Fubuki : PlayableCharacter
         };
     }
 
-    private float DamageBuff => GetComponent<Generic>().DamageBuff;
-
     void BasicAttack()
     {
         void Attack()

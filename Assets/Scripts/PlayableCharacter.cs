@@ -53,4 +53,6 @@ abstract public class PlayableCharacter : MonoBehaviour
         Skill2Timer -= Time.deltaTime;
         Skill3Timer -= Time.deltaTime;
     }
+
+    protected float DamageBuff => GetComponent<Generic>().DamageBuff;
 }
