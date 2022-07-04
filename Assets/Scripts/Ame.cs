@@ -82,6 +82,8 @@ public class Ame : MonoBehaviour
         Skill3Timer -= Time.deltaTime;
     }
 
+    private float DamageBuff => GetComponent<Generic>().DamageBuff;
+
     void Shoot()
     {
         for (int i = 0; i < BulletCount; i++)
@@ -91,7 +93,7 @@ public class Ame : MonoBehaviour
 
             //set its speed and damage
             bullet.GetComponent<LinearBullet>().Speed = BulletSpeed;
-            bullet.GetComponent<LinearBullet>().Damage = BulletDamage;
+            bullet.GetComponent<LinearBullet>().Damage = BulletDamage + DamageBuff / BulletCount;
 
             //add randomness to its direction
             Quaternion randomness = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-BulletSpread / 2, +BulletSpread / 2));
@@ -112,7 +114,7 @@ public class Ame : MonoBehaviour
             Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), GroundPoundRadious);
             foreach (var obj in objectsInRange)
             {
-                if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().Damage(GroundPoundDamage);
+                if (obj.CompareTag("Enemy")) obj.GetComponent<Generic>().Damage(GroundPoundDamage + DamageBuff);
             }
         }, GroundPoundDelay);
     }

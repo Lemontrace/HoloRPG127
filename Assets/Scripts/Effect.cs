@@ -17,9 +17,11 @@
     public class SpeedMuliplier : Effect
     {
         public float Amount;
-        public SpeedMuliplier(float duration, float amount) : base(duration)
+        public string Source;
+        public SpeedMuliplier(float duration, float amount, string sourceId = null) : base(duration)
         {
             Amount = amount;
+            Source = sourceId;
         }
     }
 
@@ -31,5 +33,15 @@
     public class Invincibility : Effect
     {
         public Invincibility(float duration) : base(duration) { }
+    }
+
+    public class DamageBuff : Effect
+    {
+        public float Amount;
+        public string Source;
+        public DamageBuff(float duration, float amount, string sourceId = null) : base(duration) {
+            Amount = amount;
+            Source = sourceId;
+        }
     }
 }
