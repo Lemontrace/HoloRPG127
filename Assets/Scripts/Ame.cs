@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ame : MonoBehaviour
+public class Ame : PlayableCharacter
 {
 
     [SerializeReference] GameObject BulletPrefab;
@@ -18,68 +18,43 @@ public class Ame : MonoBehaviour
     float GroundPoundDelay = 1f;
 
     private LinkedList<Vector3> PastPositions = new LinkedList<Vector3>();
-    private float PositionRecordTimer = 0.0f;
+    private float PositionRecordTimer;
     float RewindDelay = 1.5f;
     float RewindResolution = 0.1f;
     float RewindLength = 3f;
 
-    float Skill1CoolDown = 1f;
-    private float Skill1Timer = 0f;
-
-    float Skill2CoolDown = 65f;
-    private float Skill2Timer = 0f;
-
-    float Skill3CoolDown = 35f;
-    private float Skill3Timer = 0f;
-
     void Start()
     {
+        Skill1 = Shoot;
+        Skill1CoolDown = 0.6f;
+        Skill2 = GroundPound;
+        Skill2CoolDown = 20f;
+        Skill3 = Rewind;
+        Skill3CoolDown = 35f;
+
         PositionRecordTimer = RewindResolution;
-
-
         //initialize PastPositions
         for (int i = 0; i < RewindLength / RewindResolution; i++) PastPositions.AddLast(transform.position);
     }
 
     // Update is called once per frame
-    void Update()
+    override protected void Update()
     {
+        base.Update();
 
-        DecreaseTimers();
-
-        //record position
-        if (PositionRecordTimer <= 0) RecordPosition();
-
-
-        //invoke skill 1
-        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
-        {
-            Skill1Timer = Skill1CoolDown;
-            Shoot();
-        }
-
-        //invoke skill 2
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
-        {
-            Skill2Timer = Skill2CoolDown;
-            GroundPound();
-        }
-
-        //invoke skill 3
-            if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
-        {
-            Skill3Timer = Skill3CoolDown;
-            Rewind();
-        }
-
-
-    }
-    void DecreaseTimers()
-    {
         PositionRecordTimer -= Time.deltaTime;
-        Skill1Timer -= Time.deltaTime;
-        Skill2Timer -= Time.deltaTime;
-        Skill3Timer -= Time.deltaTime;
+        //record position
+        if (PositionRecordTimer <= 0)
+        {
+            PositionRecordTimer = RewindResolution;
+            RecordPosition();
+        }
+    }
+
+    private void RecordPosition()
+    {
+        PastPositions.AddLast(transform.position);
+        PastPositions.RemoveFirst();
     }
 
     void Shoot()
@@ -117,14 +92,7 @@ public class Ame : MonoBehaviour
         }, GroundPoundDelay);
     }
 
-
-    private void RecordPosition()
-    {
-        PositionRecordTimer = RewindResolution;
-        PastPositions.AddLast(transform.position);
-        PastPositions.RemoveFirst();
-    }
-
+    //TODO record and recover hp
     void Rewind()
     {
         //make the character unable to move during animation

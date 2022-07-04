@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Pekora : MonoBehaviour
+public class Pekora : PlayableCharacter
 {
     [SerializeReference] GameObject CarrotPrefab;
     float CarrotThrowSpeed = 15;
@@ -19,46 +19,14 @@ public class Pekora : MonoBehaviour
     float CarrotBombExplosionRadious = 2;
     float CarrotBombHeight = 3 * Util.TileSize;
 
-    float Skill1CoolDown = 1f;
-    float Skill1Timer = 0f;
-
-    float Skill2CoolDown = 20f;
-    float Skill2Timer = 0f;
-
-    float Skill3CoolDown = 70f;
-    float Skill3Timer = 0f;
-
-    void Update()
+    void Start()
     {
-        DecreaseTimers();
-
-        //invoke skill 1
-        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
-        {
-            Skill1Timer = Skill1CoolDown;
-            CarrotThrow();
-        }
-
-        //invoke skill 2
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
-        {
-            Skill2Timer = Skill2CoolDown;
-            CarrotHammer();
-        }
-
-        //invoke skill 3
-        if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
-        {
-            Skill3Timer = Skill3CoolDown;
-            CarrotBomb();
-        }
-    }
-
-    void DecreaseTimers()
-    {
-        Skill1Timer -= Time.deltaTime;
-        Skill2Timer -= Time.deltaTime;
-        Skill3Timer -= Time.deltaTime;
+        Skill1 = CarrotThrow;
+        Skill1CoolDown = 0.7f;
+        Skill2 = CarrotHammer;
+        Skill2CoolDown = 14f;
+        Skill3 = CarrotBomb;
+        Skill3CoolDown = 50f;
     }
 
     void CarrotThrow() =>
