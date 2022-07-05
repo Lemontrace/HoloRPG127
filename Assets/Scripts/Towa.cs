@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Towa : MonoBehaviour
+public class Towa : PlayableCharacter
 {
 
     [SerializeReference] GameObject LaserPrefab;
@@ -23,52 +23,16 @@ public class Towa : MonoBehaviour
     float UltDuration = 10;
     float UltSlowAmount = 30;
     float UltRadious = 2;
-    float CubeSKillCoolDownWhileUlt = 5f;
+    float Skill2CoolDownWhileUlt = 5f;
 
-
-    float Skill1CoolDown = 1f;
-    private float Skill1Timer = 0f;
-
-    float Skill2CoolDown = 8f;
-    private float Skill2Timer = 0f;
-
-    float Skill3CoolDown = 40f;
-    private float Skill3Timer = 0f;
-
-
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-
-        DecreaseTimers();
-
-
-        //invoke skill 1
-        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
-        {
-            Skill1Timer = Skill1CoolDown;
-            Laser();
-        }
-
-        //invoke skill 2
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
-        {
-            Skill2Timer = Skill2CoolDown;
-            SummonCubes();
-        }
-
-        //invoke skill 3
-        if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
-        {
-            Skill3Timer = Skill3CoolDown;
-            Ult();
-        }
-    }
-    void DecreaseTimers()
-    {
-        Skill1Timer -= Time.deltaTime;
-        Skill2Timer -= Time.deltaTime;
-        Skill3Timer -= Time.deltaTime;
+        Skill1 = Laser;
+        Skill1CoolDown = 1f;
+        Skill2 = SummonCubes;
+        Skill2CoolDown = 5f;
+        Skill3 = Ult;
+        Skill3CoolDown = 60f;
     }
 
     //Shoots Laser in a direction, slowing all enemies on path
@@ -93,9 +57,10 @@ public class Towa : MonoBehaviour
     //summon cubes that fly towards nearest enemy after brief delay
     void SummonCubes()
     {
-        Vector3 center = transform.position;
         int cubeCount;
         if (DevilForm) cubeCount = 5; else cubeCount = 4;
+
+        Vector3 center = transform.position;
         var angleOffset = 45;
         for (int i = 0; i < cubeCount; i++)
         {
@@ -107,7 +72,7 @@ public class Towa : MonoBehaviour
             towaCube.Radious = CubeSpinRadious;
             towaCube.ScaleY = 0.8f;
             towaCube.Angle = angle;
-            towaCube.Damage = CubeDamage;
+            towaCube.Damage = CubeDamage + DamageBuff/cubeCount;
         }
     }
 
@@ -116,7 +81,7 @@ public class Towa : MonoBehaviour
         //set DevilForm to true and then UltDuration seconds later, false
         DevilForm = true;
         var originalCooldown = Skill2CoolDown;
-        Skill2CoolDown = CubeSKillCoolDownWhileUlt;
+        Skill2CoolDown = Skill2CoolDownWhileUlt;
         Skill2Timer = 0;
 
         var snowstormSprite  = Instantiate(SnowstormPrefab);
@@ -129,7 +94,7 @@ public class Towa : MonoBehaviour
 
 
         //slow down enemy when towa's in devilform
-        void action()
+        void applySlowRecursive()
         {
             var center = transform.position;
             center.y -= 0.5f * Util.TileSize;
@@ -140,9 +105,9 @@ public class Towa : MonoBehaviour
                 collider.GetComponent<EffectHandler>().AddEffect(new Effect.SpeedMuliplier(0.1f, 1 - UltSlowAmount / 100));
             }
             //re-apply slow every 0.1 seconds
-            if (DevilForm) Util.DelayedExecutionManager.ScheduleAction(() => { if (DevilForm) action(); }, 0.1f);
+            Util.DelayedExecutionManager.ScheduleAction(() => { if (DevilForm) applySlowRecursive(); }, 0.1f);
         }
 
-        action();
+        applySlowRecursive();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fubuki : MonoBehaviour
+public class Fubuki : PlayableCharacter
 {
 
     float BasicAttackReach = Util.TileSize * 1;
@@ -26,18 +26,17 @@ public class Fubuki : MonoBehaviour
     float SwordAuraSpeed = Util.TileSize * 5;
     float SwordAuraDelay = 1f;
 
-
-    float Skill1CoolDown = 1.2f;
-    private float Skill1Timer = 0f;
-
-    float Skill2CoolDown = 7f;
-    private float Skill2Timer = 0f;
-
-    float Skill3CoolDown = 60f;
-    private float Skill3Timer = 0f;
-
     void Start()
     {
+        Skill1 = BasicAttack;
+        Skill1CoolDown = 1.2f;
+        Skill2 = Buff;
+        Skill2CoolDown = 7f;
+        Skill3 = Ult;
+        Skill3CoolDown = 60f;
+
+
+        //note : could use effect handler to implement shield
         var generic = GetComponent<Generic>();
         generic.OnHit += (damage) =>
         {
@@ -56,41 +55,6 @@ public class Fubuki : MonoBehaviour
         };
     }
 
-    void Update()
-    {
-
-        DecreaseTimers();
-
-        //invoke skill 1
-        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
-        {
-            Skill1Timer = Skill1CoolDown;
-            BasicAttack();
-        }
-
-        //invoke skill 2
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
-        {
-            Skill2Timer = Skill2CoolDown;
-            Buff();
-        }
-
-        //invoke skill 3
-        if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
-        {
-            Skill3Timer = Skill3CoolDown;
-            Ult();
-        }
-
-
-    }
-    void DecreaseTimers()
-    {
-        Skill1Timer -= Time.deltaTime;
-        Skill2Timer -= Time.deltaTime;
-        Skill3Timer -= Time.deltaTime;
-    }
-
     void BasicAttack()
     {
         void Attack()
@@ -104,9 +68,12 @@ public class Fubuki : MonoBehaviour
             foreach (var collider in colliders)
             {
                 if (!collider.gameObject.CompareTag("Enemy")) continue;
-                collider.GetComponent<Generic>().Damage(BasicAttackDamage);
+                var damage = BasicAttackDamage + DamageBuff / 2;
+                if (Buffed) damage *= BuffDamageMultiplier;
+                collider.GetComponent<Generic>().Damage(damage);
             }
         }
+
         Attack();
         Util.DelayedExecutionManager.ScheduleAction(Attack, 0.6f);
     }
@@ -140,7 +107,7 @@ public class Fubuki : MonoBehaviour
             swordAura.Direction = facing;
             swordAura.Speed = SwordAuraSpeed;
 
-            var damage = SwordAuraDamage;
+            var damage = SwordAuraDamage + DamageBuff;
             if (Buffed) damage *= BuffDamageMultiplier;
             swordAura.Damage = damage;
             swordAura.Range = SwordAuraReach;

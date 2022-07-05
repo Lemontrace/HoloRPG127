@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Pekora : MonoBehaviour
+public class Pekora : PlayableCharacter
 {
     [SerializeReference] GameObject CarrotPrefab;
     float CarrotThrowSpeed = 15;
@@ -14,55 +14,25 @@ public class Pekora : MonoBehaviour
     float CarrotHammerStunDuration = 1;
 
     [SerializeReference] GameObject CarrotBombPrefab;
+    int CarrotBombCount = 5;
+    float CarrotBombRadious = Util.TileSize * 5;
     float CarrotBombDropSpeed = 5;
     float CarrotBombDamage = 80;
     float CarrotBombExplosionRadious = 2;
     float CarrotBombHeight = 3 * Util.TileSize;
 
-    float Skill1CoolDown = 1f;
-    float Skill1Timer = 0f;
-
-    float Skill2CoolDown = 20f;
-    float Skill2Timer = 0f;
-
-    float Skill3CoolDown = 70f;
-    float Skill3Timer = 0f;
-
-    void Update()
+    void Start()
     {
-        DecreaseTimers();
-
-        //invoke skill 1
-        if (Input.GetButton("Skill1") && Skill1Timer <= 0)
-        {
-            Skill1Timer = Skill1CoolDown;
-            CarrotThrow();
-        }
-
-        //invoke skill 2
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
-        {
-            Skill2Timer = Skill2CoolDown;
-            CarrotHammer();
-        }
-
-        //invoke skill 3
-        if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
-        {
-            Skill3Timer = Skill3CoolDown;
-            CarrotBomb();
-        }
-    }
-
-    void DecreaseTimers()
-    {
-        Skill1Timer -= Time.deltaTime;
-        Skill2Timer -= Time.deltaTime;
-        Skill3Timer -= Time.deltaTime;
+        Skill1 = CarrotThrow;
+        Skill1CoolDown = 0.7f;
+        Skill2 = CarrotHammer;
+        Skill2CoolDown = 14f;
+        Skill3 = CarrotBomb;
+        Skill3CoolDown = 50f;
     }
 
     void CarrotThrow() =>
-        Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage, CarrotThrowSpeed, CarrotThrowRange, true);
+        Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage + DamageBuff, CarrotThrowSpeed, CarrotThrowRange, true);
 
     void CarrotHammer()
     {
@@ -78,7 +48,7 @@ public class Pekora : MonoBehaviour
             if (collider.gameObject.CompareTag("Enemy"))
             {
                 //damage
-                collider.gameObject.GetComponent<Generic>().Damage(CarrotHammerDamage);
+                collider.gameObject.GetComponent<Generic>().Damage(CarrotHammerDamage + DamageBuff);
                 //stun
                 collider.gameObject.GetComponent<EffectHandler>().AddEffect(new Effect.Stun(CarrotHammerStunDuration));
             }
@@ -87,18 +57,19 @@ public class Pekora : MonoBehaviour
 
     void CarrotBomb()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < CarrotBombCount; i++)
         {
-            Vector2 pos2 = Random.insideUnitCircle * Util.TileSize * 5;
+            Vector2 pos2 = Random.insideUnitCircle * CarrotBombRadious;
             Vector3 pos = transform.position + new Vector3(pos2.x, pos2.y + CarrotBombHeight, 0);
-            DelayedExecutionManager.ActionDelegate bombThrow = () => {
+            void bombThrow()
+            {
                 var bomb = Instantiate(CarrotBombPrefab, pos, Quaternion.identity);
                 var bombComponent = bomb.GetComponent<DroppedCarrotBomb>();
                 bombComponent.ExplosionRadious = CarrotBombExplosionRadious;
-                bombComponent.ExplosionDamage = CarrotBombDamage;
+                bombComponent.ExplosionDamage = CarrotBombDamage + DamageBuff/CarrotBombCount;
                 bombComponent.Height = CarrotBombHeight;
                 bombComponent.Speed = CarrotBombDropSpeed;
-            };
+            }
             Util.DelayedExecutionManager.ScheduleAction(bombThrow, 0.5f * (i + 1));
         }
     }

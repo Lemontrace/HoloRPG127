@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager
 {
-
+    const int DataVersion = 0;
     public struct InventoryEntry
     {
         public InventoryEntry(string id, int count = 1, string itemData = "{}")
@@ -20,19 +18,29 @@ public class InventoryManager : MonoBehaviour
         public string ItemData;
     }
 
-    static string InventorySavePath = "Inventory.json";
+    private struct InventoryInfo
+    {
+        public int DataVersion;
+        public int MaxEntry;
+        public List<InventoryEntry> InventoryEntries;
+    }
 
 
     //returns copy of ItemList so it can't be modified from outside
     public List<InventoryEntry> Inventory {get { return new List<InventoryEntry>(ItemList); } }
     public int EntryCount { get { return ItemList.Count; } }
 
-
     public int MaxInventoryEntry = 30;
 
 
     //actual item data
-    List<InventoryEntry> ItemList;
+    private List<InventoryEntry> ItemList;
+
+    public InventoryManager(int maxEntry, List<InventoryEntry> inventoryEntries)
+    {
+        ItemList = inventoryEntries;
+        MaxInventoryEntry = maxEntry;
+    }
 
 
     public bool TryToAddItem(InventoryEntry entry)
@@ -71,7 +79,7 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
 
-    //tries to remove @param count item from @param slot
+    //tries to remove count item from slot
     //returns if items are actually removed
     public bool TryToRemoveItem(int slot, int count)
     {
@@ -79,43 +87,26 @@ public class InventoryManager : MonoBehaviour
         if (entry.Count >= count)
         {
             entry.Count -= count;
+            if (entry.Count == 0) ItemList.RemoveAt(slot);
             return true;
         }
         else return false;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Load();
-    }
     
-    void Load()
-    {
-        //file path
-        string savePath = Path.Combine(Application.persistentDataPath, InventorySavePath);
-        if (!File.Exists(savePath))
-        {
-            //file doesn't exist, create empty inventory
-            ItemList = new List<InventoryEntry>();
-        } else
-        {
-            //load inventory from JSON
-            string JSONString = File.ReadAllText(savePath);
-            ItemList = JsonUtility.FromJson<List<InventoryEntry>>(JSONString);
-        }
+    //loads InventoryManager from path, returning null if the file doesn't exist
+    public static InventoryManager LoadInventory(string JSONString)
+    {        
+        var inventoryInfo = JsonUtility.FromJson<InventoryInfo>(JSONString);
+        return new InventoryManager(inventoryInfo.MaxEntry, inventoryInfo.InventoryEntries);
     }
 
-    public void Save()
+    //save InventoryManager to path
+    public string SaveInventory()
     {
-        string savePath = Path.Combine(Application.persistentDataPath, InventorySavePath);
-        File.WriteAllText(savePath, JsonUtility.ToJson(Inventory));
-    }
-
-
-    //save on quit
-    private void OnApplicationQuit()
-    {
-        Save();
+        var inventoryInfo = new InventoryInfo();
+        inventoryInfo.InventoryEntries = ItemList;
+        inventoryInfo.MaxEntry = MaxInventoryEntry;
+        inventoryInfo.DataVersion = DataVersion;
+        return JsonUtility.ToJson(inventoryInfo);
     }
 }

@@ -123,67 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &18544085
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 18544088}
-  - component: {fileID: 18544087}
-  - component: {fileID: 18544086}
-  m_Layer: 0
-  m_Name: InventoryManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &18544086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18544085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12a0f5135be61034da507e83806993c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InventoryUI: {fileID: 24882297}
-  SlotGrid: {fileID: 1901729313}
-  SlotPrefab: {fileID: 2156435262136095227, guid: 70b11399f6a53fa4380fa27d99196c69, type: 3}
-  ItemActions: {fileID: 82132238}
---- !u!114 &18544087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18544085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44960aed1ee480d43b32876f96cc26ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxInventoryEntry: 30
---- !u!4 &18544088
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18544085}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &24882297
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +584,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 18544086}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryUIControl, Assembly-CSharp
         m_MethodName: OnItemActionDrop
         m_Mode: 1
@@ -821,7 +760,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 18544086}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryUIControl, Assembly-CSharp
         m_MethodName: OnItemActionCancel
         m_Mode: 1
@@ -1198,7 +1137,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 18544086}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryUIControl, Assembly-CSharp
         m_MethodName: OnItemActionUse
         m_Mode: 1
@@ -1441,7 +1380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -229.99997, y: -40}
+  m_AnchoredPosition: {x: -230, y: -40}
   m_SizeDelta: {x: -500, y: -160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1504566749

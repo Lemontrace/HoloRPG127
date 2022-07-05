@@ -21,6 +21,16 @@ public class Generic : MonoBehaviour
 
     public float HitPoint;
 
+    public float DamageBuff {
+        get
+        {
+            float value = 0;
+            foreach (var effect in effectHandler.AllEffects)
+                if (effect is Effect.DamageBuff buff) value += buff.Amount;
+            return value;
+        }
+    }
+
     public float BaseDefence;
     public float Defence
     {
@@ -51,7 +61,7 @@ public class Generic : MonoBehaviour
     public bool Stuned { get { return effectHandler.AllEffects.Exists((effect) => effect is Effect.Stun);  } }
     public bool Rooted { get { return Stuned || effectHandler.AllEffects.Exists((effect) => effect is Effect.Root); } }
 
-    private void Start()
+    void Start()
     {
         effectHandler = GetComponent<EffectHandler>();
     }
@@ -72,6 +82,7 @@ public class Generic : MonoBehaviour
     public void Heal(float amount)
     {
         HitPoint += amount;
+        if (HitPoint > MaxHitPoint) HitPoint = MaxHitPoint;
     }
 
 }
