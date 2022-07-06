@@ -18,8 +18,6 @@ public class EffectHandler : MonoBehaviour
         AllEffects.RemoveAll((effect) => !effect.Alive);
     }
 
-    
-
     public void AddEffect(Effect effect)
     {
         AllEffects.Add(effect);
@@ -28,6 +26,11 @@ public class EffectHandler : MonoBehaviour
     public void RemoveEffect<T>()
     {
         AllEffects.RemoveAll((effect) => effect is T);
+    }
+
+    public void ClearEffect()
+    {
+        AllEffects.Clear();
     }
 
 }
