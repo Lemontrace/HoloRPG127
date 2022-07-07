@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Util
 {
+    public static GameObject Player { get { return GameObject.FindGameObjectWithTag("Player"); } }
+
     public static DelayedExecutionManager DelayedExecutionManager
         => GameObject.Find("Managers").GetComponent<DelayedExecutionManager>();
 
