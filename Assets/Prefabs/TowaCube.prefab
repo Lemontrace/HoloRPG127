@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4180553126764781513}
   - component: {fileID: 1485527464350377839}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TowaCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

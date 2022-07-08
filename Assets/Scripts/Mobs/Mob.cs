@@ -1,15 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-abstract public class Mob : MonoBehaviour
+public abstract partial class Mob : MonoBehaviour
 {
-    protected struct DropInfo
-    {
-        int ItemId;
-        int ItemCount;
-        int DropChance;
-    }
 
-    protected List<DropInfo> Drops = new List<DropInfo>();
+    [SerializeReference] MobDropSO Drops;
 
     protected bool Aggroed = false;
     protected float UnAggroRadious = 7f;
