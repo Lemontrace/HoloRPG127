@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Util
 {
+    public static float SpeedUnitConversion(float speed) => speed / 330 * 1.5f * TileSize;
+
     public static GameObject Player { get { return GameObject.FindGameObjectWithTag("Player"); } }
 
     public static DelayedExecutionManager DelayedExecutionManager

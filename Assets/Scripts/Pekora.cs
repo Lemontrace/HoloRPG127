@@ -21,8 +21,12 @@ public class Pekora : PlayableCharacter
     float CarrotBombExplosionRadious = 2;
     float CarrotBombHeight = 3 * Util.TileSize;
 
-    void Start()
+    override protected void Start()
     {
+        MaxHp = 850;
+        BaseDefence = 8;
+        BaseMovementSpeed = Util.SpeedUnitConversion(335);
+
         Skill1 = CarrotThrow;
         Skill1CoolDown = 0.7f;
         Skill2 = CarrotHammer;

@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a233d1dca7639044bb3c0a956f952374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skill1CoolDown: 0
+  Skill2CoolDown: 0
+  Skill3CoolDown: 0
   CarrotPrefab: {fileID: 2590649044576056463, guid: 4b51847bd6b00614b88cb05b17ae1094, type: 3}
   CarrotBombPrefab: {fileID: 8989191076665761999, guid: 5550f9a3aa7d48d419a4fa3d3bd9cf43, type: 3}
 --- !u!114 &6012671387360587293
@@ -114,11 +117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee72753cad9636648a921260a227e830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Facing: {x: 0, y: 0, z: 0}
-  MaxHitPoint: 850
-  HitPoint: 850
-  BaseDefence: 8
-  BaseMovementSpeed: 1.5
+  Facing: {x: 1, y: 0, z: 0}
+  MaxHitPoint: 0
+  HitPoint: 0
+  BaseDefence: 0
+  BaseMovementSpeed: 0
 --- !u!114 &6012671387360587292
 MonoBehaviour:
   m_ObjectHideFlags: 0

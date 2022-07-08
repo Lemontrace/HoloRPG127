@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17ab43387f4f094c9babbfa6f7aae98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skill1CoolDown: 0
+  Skill2CoolDown: 0
+  Skill3CoolDown: 0
   ShieldPrefab: {fileID: 3145152893271402600, guid: e18279af68ec30d478b54baaa43bd230, type: 3}
   SwordAuraPrefab: {fileID: 6784709323315571307, guid: 95bcba13ad25ab445a3f9375fb73847b, type: 3}
 --- !u!114 &2481188216405242938
@@ -115,10 +118,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Facing: {x: 1, y: 0, z: 0}
-  MaxHitPoint: 1100
-  HitPoint: 1100
-  BaseDefence: 17
-  BaseMovementSpeed: 1.3
+  MaxHitPoint: 0
+  HitPoint: 0
+  BaseDefence: 0
+  BaseMovementSpeed: 0
 --- !u!114 &2481188216405242939
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,8 +26,12 @@ public class Fubuki : PlayableCharacter
     float SwordAuraSpeed = Util.TileSize * 5;
     float SwordAuraDelay = 1f;
 
-    void Start()
+    override protected void Start()
     {
+        MaxHp = 1100;
+        BaseDefence = 17;
+        BaseMovementSpeed = Util.SpeedUnitConversion(355);
+
         Skill1 = BasicAttack;
         Skill1CoolDown = 1.2f;
         Skill2 = Buff;

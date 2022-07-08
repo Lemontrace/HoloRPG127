@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13563875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.35, y: 1.41, z: 0}
+  m_LocalPosition: {x: -2.72, y: 1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7045,21 +7045,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ame
       objectReference: {fileID: 0}
-    - target: {fileID: 8145363627508540729, guid: bfbf26104d18c13419a66e953cff8d50, type: 3}
-      propertyPath: BaseMovementSpeed
-      value: 2.04
-      objectReference: {fileID: 0}
     - target: {fileID: 8145363627508540735, guid: bfbf26104d18c13419a66e953cff8d50, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8145363627508540735, guid: bfbf26104d18c13419a66e953cff8d50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5216312
+      value: 2.99
       objectReference: {fileID: 0}
     - target: {fileID: 8145363627508540735, guid: bfbf26104d18c13419a66e953cff8d50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7954385
+      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 8145363627508540735, guid: bfbf26104d18c13419a66e953cff8d50, type: 3}
       propertyPath: m_LocalPosition.z

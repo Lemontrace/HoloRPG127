@@ -25,8 +25,12 @@ public class Towa : PlayableCharacter
     float UltRadious = 2;
     float Skill2CoolDownWhileUlt = 5f;
 
-    void Start()
+    override protected void Start()
     {
+        MaxHp = 800;
+        BaseDefence = 8;
+        BaseMovementSpeed = Util.SpeedUnitConversion(345);
+
         Skill1 = Laser;
         Skill1CoolDown = 1f;
         Skill2 = SummonCubes;
