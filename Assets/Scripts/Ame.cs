@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Ame : PlayableCharacter
 {
-
     [SerializeReference] GameObject BulletPrefab;
     int BulletCount = 20;
     float BulletSpread = 30; //spread in degrees
@@ -23,8 +22,12 @@ public class Ame : PlayableCharacter
     float RewindResolution = 0.1f;
     float RewindLength = 3f;
 
-    void Start()
+    protected override void Start()
     {
+        MaxHp = 1000;
+        BaseDefence = 10;
+        BaseMovementSpeed = Util.SpeedUnitConversion(350);
+
         Skill1 = Shoot;
         Skill1CoolDown = 0.6f;
         Skill2 = GroundPound;
@@ -35,13 +38,13 @@ public class Ame : PlayableCharacter
         PositionRecordTimer = RewindResolution;
         //initialize PastPositions
         for (int i = 0; i < RewindLength / RewindResolution; i++) PastPositions.AddLast(transform.position);
+
+        base.Start();
     }
 
     // Update is called once per frame
-    override protected void Update()
+    protected override void Update()
     {
-        base.Update();
-
         PositionRecordTimer -= Time.deltaTime;
         //record position
         if (PositionRecordTimer <= 0)
@@ -49,6 +52,7 @@ public class Ame : PlayableCharacter
             PositionRecordTimer = RewindResolution;
             RecordPosition();
         }
+        base.Update();
     }
 
     private void RecordPosition()
@@ -65,15 +69,15 @@ public class Ame : PlayableCharacter
             GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
 
             //set its speed and damage
-            bullet.GetComponent<LinearBullet>().Speed = BulletSpeed;
-            bullet.GetComponent<LinearBullet>().Damage = BulletDamage + DamageBuff / BulletCount;
+            bullet.GetComponent<LinearProjectile>().Speed = BulletSpeed;
+            bullet.GetComponent<FriendlyObject>().Damage = BulletDamage + DamageBuff / BulletCount;
 
             //add randomness to its direction
             Quaternion randomness = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-BulletSpread / 2, +BulletSpread / 2));
-            bullet.GetComponent<LinearBullet>().Direction = randomness * GetComponent<Generic>().Facing;
+            bullet.GetComponent<LinearProjectile>().Direction = randomness * GetComponent<Generic>().Facing;
 
             //set random range
-            bullet.GetComponent<LinearBullet>().Range = UnityEngine.Random.Range(MaxBulletRange / 3, MaxBulletRange);
+            bullet.GetComponent<LinearProjectile>().Range = UnityEngine.Random.Range(MaxBulletRange / 3, MaxBulletRange);
 
         }
 

@@ -21,18 +21,27 @@ public class Pekora : PlayableCharacter
     float CarrotBombExplosionRadious = 2;
     float CarrotBombHeight = 3 * Util.TileSize;
 
-    void Start()
+    override protected void Start()
     {
+        MaxHp = 850;
+        BaseDefence = 8;
+        BaseMovementSpeed = Util.SpeedUnitConversion(335);
+
         Skill1 = CarrotThrow;
         Skill1CoolDown = 0.7f;
         Skill2 = CarrotHammer;
         Skill2CoolDown = 14f;
         Skill3 = CarrotBomb;
         Skill3CoolDown = 50f;
+        base.Start();
     }
 
-    void CarrotThrow() =>
-        Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage + DamageBuff, CarrotThrowSpeed, CarrotThrowRange, true);
+    void CarrotThrow()
+    {
+        var carrot = Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowSpeed, CarrotThrowRange).GetComponent<FriendlyObject>();
+        carrot.Damage = CarrotThrowDamage + DamageBuff;
+        carrot.DestroyOnHit = false;
+    }
 
     void CarrotHammer()
     {
