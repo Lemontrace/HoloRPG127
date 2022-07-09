@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -6421732973359793109}
   - component: {fileID: 8896402166052829845}
   - component: {fileID: 100550051578704549}
+  - component: {fileID: 3885711458511084235}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -100,8 +101,6 @@ MonoBehaviour:
   Speed: 0
   Direction: {x: 0, y: 0, z: 0}
   Range: 0
-  Damage: 0
-  Piercing: 0
 --- !u!70 &8896402166052829845
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -139,3 +138,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3885711458511084235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590649044576056463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3348f1087e4bf43aad2fba879e31b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 0
+  DestroyOnHit: 1

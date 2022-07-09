@@ -3,5 +3,5 @@ public struct DropInfo
 {
     public int ItemId;
     public int ItemCount;
-    public int DropChance;
+    public float DropChance;
 }

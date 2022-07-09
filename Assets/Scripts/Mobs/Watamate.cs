@@ -2,30 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Watamate : PassiveMob
+public class Watamate : SimpleFollowingMob
 {
-    Timer ChargeTimer = new Timer();
     float ChargeDistance = Util.TileSize * 3;
     float ChargeSpeed = Util.TileSize * 6;
     bool Charging = false;
     Vector3 ChargeDirection;
 
+
+    protected override void Start()
+    {
+        base.Start();
+    }
     protected override void onAggroUpdate()
     {
-        if (ChargeTimer.Done) //initiate charge
+        if (AttackTimer.Done) //initiate charge
         {
             StartCharging();
-            ChargeTimer.Start(Random.Range(8, 10));
-        } else if (Charging) //charging
+            AttackTimer.Start(Random.Range(8, 10));
+        }
+        else if (Charging) //charging
         {
             transform.Translate(ChargeSpeed * Time.deltaTime * ChargeDirection);
-        } else //following player
-        {
-            Vector3 diretion = (Util.Player.transform.position - transform.position).normalized;
-            var speed = GetComponent<Generic>().MovementSpeed;
-            transform.Translate(speed * Time.deltaTime * diretion);
-            
         }
+        else base.onAggroUpdate();
     }
 
     void StartCharging()
@@ -34,10 +34,5 @@ public class Watamate : PassiveMob
         Util.DelayedExecutionManager.ScheduleAction(() => Charging = false, ChargeDistance / ChargeSpeed);
         Vector3 playerPosition = Util.Player.transform.position;
         ChargeDirection = (playerPosition - transform.position).normalized;
-    }
-
-    protected override void onIdleUpdate()
-    {
-        //???????
     }
 }

@@ -10,9 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 726a215f30e497e48855ec284a7ba651, type: 3}
-  m_Name: WatamateDrop
+  m_Name: EmptyDrop
   m_EditorClassIdentifier: 
-  Drops:
-  - ItemId: 0
-    ItemCount: 0
-    DropChance: 0
+  Drops: []

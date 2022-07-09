@@ -33,10 +33,15 @@ public class Pekora : PlayableCharacter
         Skill2CoolDown = 14f;
         Skill3 = CarrotBomb;
         Skill3CoolDown = 50f;
+        base.Start();
     }
 
-    void CarrotThrow() =>
-        Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowDamage + DamageBuff, CarrotThrowSpeed, CarrotThrowRange, true);
+    void CarrotThrow()
+    {
+        var carrot = Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowSpeed, CarrotThrowRange).GetComponent<FriendlyObject>();
+        carrot.Damage = CarrotThrowDamage + DamageBuff;
+        carrot.DestroyOnHit = false;
+    }
 
     void CarrotHammer()
     {

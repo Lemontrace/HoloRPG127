@@ -57,6 +57,8 @@ public class Fubuki : PlayableCharacter
                 CurrentShield = 0;
             }
         };
+
+        base.Start();
     }
 
     void BasicAttack()
@@ -107,15 +109,18 @@ public class Fubuki : PlayableCharacter
 
             var position = transform.position + facing * Util.TileSize * 0.5f;
             var rotation = Quaternion.FromToRotation(Vector3.right, facing);
-            var swordAura = Instantiate(SwordAuraPrefab, position, rotation).GetComponent<LinearBullet>();
-            swordAura.Direction = facing;
-            swordAura.Speed = SwordAuraSpeed;
+            var swordAura = Instantiate(SwordAuraPrefab, position, rotation);
+            var projectileComponent = swordAura.GetComponent<LinearProjectile>();
+            projectileComponent.Direction = facing;
+            projectileComponent.Speed = SwordAuraSpeed;
+            projectileComponent .Range = SwordAuraReach;
 
+
+            var friendlyOjectComponent = swordAura.GetComponent<FriendlyObject>();
             var damage = SwordAuraDamage + DamageBuff;
             if (Buffed) damage *= BuffDamageMultiplier;
-            swordAura.Damage = damage;
-            swordAura.Range = SwordAuraReach;
-            swordAura.Piercing = true;
+            friendlyOjectComponent.Damage = damage;
+            friendlyOjectComponent.DestroyOnHit = false;
         }
 
         Util.DelayedExecutionManager.ScheduleAction(Shoot, SwordAuraDelay);

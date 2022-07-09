@@ -31,6 +31,7 @@ public class Chloe : PlayableCharacter
         Skill2CoolDown = 5;
         Skill3 = Assasinate;
         Skill3CoolDown = 75;
+
         base.Start();
     }
 
@@ -56,8 +57,12 @@ public class Chloe : PlayableCharacter
     }
 
     void KnifeThrow()
-        => Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowDamage + DamageBuff, KnifeThrowSpeed, KnifeThrowRange, false);
-
+    {
+        var knife = Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowSpeed, KnifeThrowRange).GetComponent<FriendlyObject>();
+        knife.Damage = KnifeThrowDamage;
+        knife.DestroyOnHit = true;
+        
+    }
     void Assasinate()
     {
         //get furthest target in AssassinationRadious

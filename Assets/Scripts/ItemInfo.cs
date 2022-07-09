@@ -15,4 +15,6 @@ public class ItemInfo
         this.id = id;
         this.useFunction = useFunction;
     }
+
+
 }

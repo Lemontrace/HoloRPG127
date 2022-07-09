@@ -5,19 +5,18 @@ using UnityEngine;
 abstract public class PassiveMob : Mob
 {
 
-    protected virtual void Start()
+    protected override void Start()
     {
-        GetComponent<Generic>().OnHit += (_) =>
-        {
-            Aggroed = true;
-        };
+        GetComponent<Generic>().OnHit += (_) => Aggroed = true;
+
+        base.Start();
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        float distanceToPlayer = Vector2.Distance((Vector2)player.transform.position, (Vector2)transform.position);
+        float distanceToPlayer = (player.transform.position - transform.position).magnitude;
 
         if (distanceToPlayer > UnAggroRadious) Aggroed = false;
 
