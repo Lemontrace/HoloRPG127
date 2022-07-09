@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1370441990279439430}
   - component: {fileID: 1370441990279439429}
   - component: {fileID: 1370441990279439431}
+  - component: {fileID: 153115184}
   m_Layer: 0
   m_Name: Watame
   m_TagString: Enemy
@@ -165,5 +166,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a208b7e89adc8f41bce35ec172b8077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &153115184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370441990279439426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34d01b262e526447b27d933c4eb979d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -79,6 +79,10 @@ public class TowaCube : MonoBehaviour
 
     void UpdateOnSeek()
     {
+        if (SeekTarget == null) {
+            Destroy(gameObject);
+            return;
+        }
         transform.position = Vector3.MoveTowards(transform.position, SeekTarget.transform.position, SeekSpeed * Time.deltaTime);
     }
 

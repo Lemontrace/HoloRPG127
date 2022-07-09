@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HostileObject : MonoBehaviour
+public class HostileProjectile : MonoBehaviour
 {
     public float Damage;
     public bool DestroyOnHit = true;
