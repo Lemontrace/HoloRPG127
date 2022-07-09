@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1370441990279439435}
+  - component: {fileID: 1370441990279439428}
   - component: {fileID: 1370441990279439432}
   - component: {fileID: 1370441990279439433}
   - component: {fileID: 1370441990279439430}
-  - component: {fileID: 1370441990279439431}
-  - component: {fileID: 1370441990279439428}
   - component: {fileID: 1370441990279439429}
+  - component: {fileID: 1370441990279439431}
   m_Layer: 0
   m_Name: Watame
   m_TagString: Enemy
@@ -36,6 +36,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1370441990279439428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370441990279439426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c981ea68af7bfee45baccd66dad11aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Drops: {fileID: 11400000, guid: 2dd791f29e7c9744c8cb6da4f421d7ad, type: 2}
+  Stats: {fileID: 11400000, guid: 1ebedc292d89ec346bad283e1403ae66, type: 2}
 --- !u!212 &1370441990279439432
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -99,11 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee72753cad9636648a921260a227e830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Facing: {x: 0, y: 0, z: 0}
-  MaxHitPoint: 600
-  HitPoint: 600
+  Facing: {x: 1, y: 0, z: 0}
+  MaxHitPoint: 0
+  HitPoint: 0
   BaseDefence: 0
-  BaseMovementSpeed: 2.04
+  BaseMovementSpeed: 0
 --- !u!50 &1370441990279439430
 Rigidbody2D:
   serializedVersion: 4
@@ -125,30 +139,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1370441990279439431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370441990279439426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a208b7e89adc8f41bce35ec172b8077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1370441990279439428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370441990279439426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c981ea68af7bfee45baccd66dad11aa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &1370441990279439429
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -165,3 +155,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.8, y: 1.08}
   m_Direction: 1
+--- !u!114 &1370441990279439431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370441990279439426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a208b7e89adc8f41bce35ec172b8077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

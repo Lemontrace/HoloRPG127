@@ -6,9 +6,7 @@ public class SimpleFollowingMob : ActiveMob
 {
     protected override void onAggroUpdate()
     {
-        Vector3 diretion = (Util.Player.transform.position - transform.position).normalized;
-        var speed = GetComponent<Generic>().MovementSpeed;
-        transform.Translate(speed * Time.deltaTime * diretion);
+        FollowPlayer();
     }
 
     protected override void onIdleUpdate()

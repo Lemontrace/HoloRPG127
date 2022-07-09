@@ -28,7 +28,7 @@ abstract public class PlayableCharacter : MonoBehaviour
     {
         var generic = GetComponent<Generic>();
         generic.BaseMovementSpeed = BaseMovementSpeed;
-        generic.MaxHitPoint = MaxHp;
+        generic.MaxHitPoint = generic.HitPoint = MaxHp;
         generic.BaseDefence = BaseDefence;
     }
 
@@ -45,14 +45,14 @@ abstract public class PlayableCharacter : MonoBehaviour
         }
 
         //invoke skill 2
-        if (Input.GetButtonDown("Skill2") && Skill2Timer <= 0)
+        if (Input.GetButton("Skill2") && Skill2Timer <= 0)
         {
             Skill2Timer = Skill2CoolDown;
             Skill2();
         }
 
         //invoke skill 3
-        if (Input.GetButtonDown("Skill3") && Skill3Timer <= 0)
+        if (Input.GetButton("Skill3") && Skill3Timer <= 0)
         {
             Skill3Timer = Skill3CoolDown;
             Skill3();

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2954224356190635942}
   - component: {fileID: 5066998145637890671}
   - component: {fileID: -631760369273499572}
+  - component: {fileID: 3802588623886732281}
   m_Layer: 0
   m_Name: ChloeKnife
   m_TagString: Untagged
@@ -113,8 +114,6 @@ MonoBehaviour:
   Speed: 0
   Direction: {x: 0, y: 0, z: 0}
   Range: 0
-  Damage: 0
-  Piercing: 0
 --- !u!70 &5066998145637890671
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -152,3 +151,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3802588623886732281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2690569631389320337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3348f1087e4bf43aad2fba879e31b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 0
+  DestroyOnHit: 1
