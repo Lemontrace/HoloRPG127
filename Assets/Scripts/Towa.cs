@@ -32,11 +32,11 @@ public class Towa : PlayableCharacter
         BaseMovementSpeed = Util.SpeedUnitConversion(345);
 
         Skill1 = Laser;
-        Skill1CoolDown = 1f;
+        Skill1Cooldown = 1f;
         Skill2 = SummonCubes;
-        Skill2CoolDown = 5f;
+        Skill2Cooldown = 5f;
         Skill3 = Ult;
-        Skill3CoolDown = 60f;
+        Skill3Cooldown = 60f;
         base.Start();
     }
 
@@ -78,7 +78,7 @@ public class Towa : PlayableCharacter
             towaCube.Radious = CubeSpinRadious;
             towaCube.ScaleY = 0.8f;
             towaCube.Angle = angle;
-            towaCube.Damage = CubeDamage + DamageBuff/cubeCount;
+            towaCube.GetComponent<FriendlyProjectile>().Damage = CubeDamage + DamageBuff/cubeCount;
         }
     }
 
@@ -86,8 +86,8 @@ public class Towa : PlayableCharacter
     {
         //set DevilForm to true and then UltDuration seconds later, false
         DevilForm = true;
-        var originalCooldown = Skill2CoolDown;
-        Skill2CoolDown = Skill2CoolDownWhileUlt;
+        var originalCooldown = Skill2Cooldown;
+        Skill2Cooldown = Skill2CoolDownWhileUlt;
         Skill2Timer = 0;
 
         var snowstormSprite  = Instantiate(SnowstormPrefab);
@@ -95,7 +95,7 @@ public class Towa : PlayableCharacter
         Util.DelayedExecutionManager.ScheduleAction(() => {
             DevilForm = false;
             Destroy(snowstormSprite);
-            Skill2CoolDown = originalCooldown;
+            Skill2Cooldown = originalCooldown;
             }, UltDuration);
 
 

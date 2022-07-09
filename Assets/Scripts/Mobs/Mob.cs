@@ -4,7 +4,7 @@ public abstract partial class Mob : MonoBehaviour
 {
 
     [SerializeReference] protected MobDropSO Drops;
-    [SerializeReference] protected MobStatSO Stats;
+    [SerializeReference] public MobStatSO Stats;
 
     protected Timer AttackTimer;
 

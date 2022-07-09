@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FriendlyObject : MonoBehaviour
+public class FriendlyProjectile : MonoBehaviour
 {
     public float Damage;
     public bool DestroyOnHit = true;
@@ -11,13 +11,11 @@ public class FriendlyObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
-            return;
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Generic>().Damage(Damage);
             if (DestroyOnHit) Destroy(gameObject);
-            return;
         }
     }
 
@@ -26,13 +24,11 @@ public class FriendlyObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
-            return;
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Generic>().Damage(Damage);
             if (DestroyOnHit) Destroy(gameObject);
-            return;
         }
     }
 }

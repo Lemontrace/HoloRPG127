@@ -33,11 +33,11 @@ public class Fubuki : PlayableCharacter
         BaseMovementSpeed = Util.SpeedUnitConversion(355);
 
         Skill1 = BasicAttack;
-        Skill1CoolDown = 1.2f;
+        Skill1Cooldown = 1.2f;
         Skill2 = Buff;
-        Skill2CoolDown = 7f;
+        Skill2Cooldown = 7f;
         Skill3 = Ult;
-        Skill3CoolDown = 60f;
+        Skill3Cooldown = 60f;
 
 
         //note : could use effect handler to implement shield
@@ -116,7 +116,7 @@ public class Fubuki : PlayableCharacter
             projectileComponent .Range = SwordAuraReach;
 
 
-            var friendlyOjectComponent = swordAura.GetComponent<FriendlyObject>();
+            var friendlyOjectComponent = swordAura.GetComponent<FriendlyProjectile>();
             var damage = SwordAuraDamage + DamageBuff;
             if (Buffed) damage *= BuffDamageMultiplier;
             friendlyOjectComponent.Damage = damage;

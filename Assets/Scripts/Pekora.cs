@@ -28,17 +28,17 @@ public class Pekora : PlayableCharacter
         BaseMovementSpeed = Util.SpeedUnitConversion(335);
 
         Skill1 = CarrotThrow;
-        Skill1CoolDown = 0.7f;
+        Skill1Cooldown = 0.7f;
         Skill2 = CarrotHammer;
-        Skill2CoolDown = 14f;
+        Skill2Cooldown = 14f;
         Skill3 = CarrotBomb;
-        Skill3CoolDown = 50f;
+        Skill3Cooldown = 50f;
         base.Start();
     }
 
     void CarrotThrow()
     {
-        var carrot = Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowSpeed, CarrotThrowRange).GetComponent<FriendlyObject>();
+        var carrot = Util.SpawnLinearProjectile(gameObject, CarrotPrefab, CarrotThrowSpeed, CarrotThrowRange).GetComponent<FriendlyProjectile>();
         carrot.Damage = CarrotThrowDamage + DamageBuff;
         carrot.DestroyOnHit = false;
     }

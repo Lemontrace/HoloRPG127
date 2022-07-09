@@ -29,11 +29,11 @@ public class Ame : PlayableCharacter
         BaseMovementSpeed = Util.SpeedUnitConversion(350);
 
         Skill1 = Shoot;
-        Skill1CoolDown = 0.6f;
+        Skill1Cooldown = 0.6f;
         Skill2 = GroundPound;
-        Skill2CoolDown = 20f;
+        Skill2Cooldown = 20f;
         Skill3 = Rewind;
-        Skill3CoolDown = 35f;
+        Skill3Cooldown = 35f;
 
         PositionRecordTimer = RewindResolution;
         //initialize PastPositions
@@ -70,7 +70,7 @@ public class Ame : PlayableCharacter
 
             //set its speed and damage
             bullet.GetComponent<LinearProjectile>().Speed = BulletSpeed;
-            bullet.GetComponent<FriendlyObject>().Damage = BulletDamage + DamageBuff / BulletCount;
+            bullet.GetComponent<FriendlyProjectile>().Damage = BulletDamage + DamageBuff / BulletCount;
 
             //add randomness to its direction
             Quaternion randomness = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-BulletSpread / 2, +BulletSpread / 2));
