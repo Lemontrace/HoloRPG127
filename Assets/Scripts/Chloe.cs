@@ -61,7 +61,11 @@ public class Chloe : PlayableCharacter
         var knife = Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowSpeed, KnifeThrowRange).GetComponent<FriendlyProjectile>();
         knife.Damage = KnifeThrowDamage;
         knife.DestroyOnHit = true;
-        
+        knife.OnHit += (target) =>
+        {
+            for (int delay = 1; delay <= 3; ++delay)
+                Util.DelayedExecutionManager.ScheduleAction(() => target.GetComponent<Generic>().Damage(10), delay);
+        };
     }
     void Assasinate()
     {

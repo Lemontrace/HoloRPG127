@@ -22,7 +22,7 @@ public static class Util
         var position = thrower.transform.position + 0.5f * Util.TileSize * facing;
         var rotation = Quaternion.FromToRotation(Vector3.right, facing);
 
-        var projectile = GameObject.Instantiate(projectilePrefab, position, rotation).GetComponent<LinearProjectile>();
+        var projectile = GameObject.Instantiate(projectilePrefab, position, rotation).GetComponent<LinearMovement>();
         projectile.Direction = facing;
         projectile.Speed = speed;
         projectile.Range = range;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearProjectile : MonoBehaviour
+public class LinearMovement : MonoBehaviour
 {
 
     public float Speed;

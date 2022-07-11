@@ -9,6 +9,8 @@ public class CollideToAttack : MonoBehaviour
     float KnockbackDistance = Util.TileSize;
     Vector3 KnockbackDirection;
     float KnockbackTimer = 0;
+    public delegate void OnAttackDelegate(GameObject target);
+    public event OnAttackDelegate OnAttack;
 
     private void FixedUpdate()
     {
@@ -31,6 +33,7 @@ public class CollideToAttack : MonoBehaviour
 
             KnockbackDirection = collision.gameObject.transform.position - transform.position;
             KnockbackTimer = 0.2f;
+            OnAttack?.Invoke(collision.gameObject);
         }
     }
 }

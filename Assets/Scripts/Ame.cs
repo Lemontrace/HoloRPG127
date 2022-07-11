@@ -69,15 +69,15 @@ public class Ame : PlayableCharacter
             GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
 
             //set its speed and damage
-            bullet.GetComponent<LinearProjectile>().Speed = BulletSpeed;
+            bullet.GetComponent<LinearMovement>().Speed = BulletSpeed;
             bullet.GetComponent<FriendlyProjectile>().Damage = BulletDamage + DamageBuff / BulletCount;
 
             //add randomness to its direction
             Quaternion randomness = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-BulletSpread / 2, +BulletSpread / 2));
-            bullet.GetComponent<LinearProjectile>().Direction = randomness * GetComponent<Generic>().Facing;
+            bullet.GetComponent<LinearMovement>().Direction = randomness * GetComponent<Generic>().Facing;
 
             //set random range
-            bullet.GetComponent<LinearProjectile>().Range = UnityEngine.Random.Range(MaxBulletRange / 3, MaxBulletRange);
+            bullet.GetComponent<LinearMovement>().Range = UnityEngine.Random.Range(MaxBulletRange / 3, MaxBulletRange);
 
         }
 
