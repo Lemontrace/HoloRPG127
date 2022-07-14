@@ -101,6 +101,7 @@ public class Ame : PlayableCharacter
     {
         //make the character unable to move during animation
         GetComponent<EffectHandler>().AddEffect(new Effect.Stun(RewindDelay));
+        GetComponent<EffectHandler>().AddEffect(new Effect.Invincibility(RewindDelay));
         //save rewind position
         Vector3 rewindPosition = PastPositions.First.Value;
         //TODO : start rewind animation

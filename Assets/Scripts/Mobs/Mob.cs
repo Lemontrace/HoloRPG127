@@ -19,6 +19,7 @@ public abstract partial class Mob : MonoBehaviour
         AttackTimer = new Timer();
         generic.MaxHitPoint = generic.HitPoint = Stats.HitPoint;
         generic.BaseMovementSpeed = Util.SpeedUnitConversion(Stats.BaseMovementSpeed);
+        generic.BaseDefence = Stats.BaseDefence;
     }
 
     protected virtual void Die()
