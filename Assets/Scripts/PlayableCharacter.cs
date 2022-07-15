@@ -6,6 +6,10 @@ abstract public class PlayableCharacter : MonoBehaviour
 {
     protected delegate void SkillDelegate();
 
+    protected float MaxHp;
+    protected float BaseMovementSpeed;
+    protected float BaseDefence;
+
     public float Skill1CoolDown;
     public float Skill1Timer { get; private set; }
     protected SkillDelegate Skill1;
@@ -19,6 +23,14 @@ abstract public class PlayableCharacter : MonoBehaviour
     public float Skill3CoolDown;
     public float Skill3Timer { get; protected set; }
     protected SkillDelegate Skill3;
+
+    virtual protected void Start()
+    {
+        var generic = GetComponent<Generic>();
+        generic.BaseMovementSpeed = BaseMovementSpeed;
+        generic.MaxHitPoint = MaxHp;
+        generic.BaseDefence = BaseDefence;
+    }
 
     // Update is called once per frame
     virtual protected void Update()

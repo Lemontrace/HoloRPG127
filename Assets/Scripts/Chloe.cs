@@ -18,14 +18,21 @@ public class Chloe : PlayableCharacter
     float AssasinationDamage = 450;
     float AssasinationBleedDuration = 3;
 
-    private void Start()
+    override protected void Start()
     {
+        MaxHp = 800;
+        BaseDefence = 9;
+        BaseMovementSpeed = Util.SpeedUnitConversion(380);
+
+
         Skill1 = BasicAttack;
         Skill1CoolDown = 1;
         Skill2 = KnifeThrow;
         Skill2CoolDown = 5;
         Skill3 = Assasinate;
         Skill3CoolDown = 75;
+
+        base.Start();
     }
 
     void BasicAttack()
@@ -50,8 +57,12 @@ public class Chloe : PlayableCharacter
     }
 
     void KnifeThrow()
-        => Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowDamage + DamageBuff, KnifeThrowSpeed, KnifeThrowRange, false);
-
+    {
+        var knife = Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowSpeed, KnifeThrowRange).GetComponent<FriendlyObject>();
+        knife.Damage = KnifeThrowDamage;
+        knife.DestroyOnHit = true;
+        
+    }
     void Assasinate()
     {
         //get furthest target in AssassinationRadious

@@ -7,14 +7,14 @@ public class ItemInfo
     public static List<ItemInfo> ItemInfoList;
 
     public int id;
-    public Sprite icon;
     public delegate void Use(GameObject user, GameObject target);
     public Use useFunction;
 
-    public ItemInfo(int id, Sprite icon, Use useFunction)
+    public ItemInfo(int id, Use useFunction = null)
     {
         this.id = id;
-        this.icon = icon;
         this.useFunction = useFunction;
     }
+
+
 }

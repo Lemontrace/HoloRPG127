@@ -5,7 +5,7 @@ using UnityEngine;
 public class Towa : PlayableCharacter
 {
 
-    [SerializeReference] GameObject LaserPrefab;
+    [SerializeReference] GameObject LaserSpritePrefab;
     float LaserWidth = Util.TileSize * 0.5f;
     float LaserReach = Util.TileSize * 5;
     float LaserSlowAmount = 15;
@@ -25,14 +25,19 @@ public class Towa : PlayableCharacter
     float UltRadious = 2;
     float Skill2CoolDownWhileUlt = 5f;
 
-    void Start()
+    override protected void Start()
     {
+        MaxHp = 800;
+        BaseDefence = 8;
+        BaseMovementSpeed = Util.SpeedUnitConversion(345);
+
         Skill1 = Laser;
         Skill1CoolDown = 1f;
         Skill2 = SummonCubes;
         Skill2CoolDown = 5f;
         Skill3 = Ult;
         Skill3CoolDown = 60f;
+        base.Start();
     }
 
     //Shoots Laser in a direction, slowing all enemies on path
@@ -43,13 +48,14 @@ public class Towa : PlayableCharacter
         var position = transform.position + facing * ((LaserReach / 2) + Util.TileSize * 0.5f);
         var rotation = Quaternion.FromToRotation(Vector3.right, facing);
 
-        var LaserSprite = Instantiate(LaserPrefab, position, rotation);
+        var LaserSprite = Instantiate(LaserSpritePrefab, position, rotation);
         Util.DelayedExecutionManager.ScheduleAction(() => Destroy(LaserSprite), 0.1f);
 
         var colliders = Physics2D.OverlapBoxAll(position, new Vector2(LaserWidth, LaserReach), rotation.eulerAngles.z + 90);
         foreach (var collider in colliders)
         {
             if (!collider.gameObject.CompareTag("Enemy")) continue;
+            collider.GetComponent<Generic>().Damage(0); //deal 0 damage, but trigger onHit events
             collider.GetComponent<EffectHandler>().AddEffect(new Effect.SpeedMuliplier(1f, 1 - LaserSlowAmount / 100));
         }
     }
