@@ -6,6 +6,8 @@ public class FriendlyObject : MonoBehaviour
 {
     public float Damage;
     public bool DestroyOnHit = true;
+    public bool Explosive = false;
+    public float ExplodeRadius = 0f;
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
@@ -15,7 +17,6 @@ public class FriendlyObject : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Generic>().Damage(Damage);
             if (DestroyOnHit) Destroy(gameObject);
             return;
         }
@@ -30,9 +31,24 @@ public class FriendlyObject : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Generic>().Damage(Damage);
             if (DestroyOnHit) Destroy(gameObject);
             return;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Explosive)
+        {
+            var colliders = Physics2D.OverlapCircleAll(transform.position, ExplodeRadius);
+            foreach (Collider2D collider in colliders)
+            {
+                collider.GetComponent<Generic>().Damage(Damage);
+            }
+        }
+        else
+        {
+            GetComponent<Generic>().Damage(Damage);
         }
     }
 }
