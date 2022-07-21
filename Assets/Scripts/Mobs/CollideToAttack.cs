@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CollideToAttack : MonoBehaviour
 {
-    float AttackCooldown = 1;
-    private Timer AttackTimer = new Timer();
+    private Timer AttackTimer = new Timer(1);
     float KnockbackDistance = Util.TileSize;
     Vector3 KnockbackDirection;
     float KnockbackTimer = 0;
@@ -27,7 +26,7 @@ public class CollideToAttack : MonoBehaviour
 
         if (AttackTimer.Done)
         {
-            AttackTimer.Start(AttackCooldown);
+            AttackTimer.Start();
             float damage = GetComponent<Mob>().Stats.Attack;
             collision.gameObject.GetComponent<Generic>().Damage(damage);
 

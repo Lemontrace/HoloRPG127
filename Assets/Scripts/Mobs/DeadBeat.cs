@@ -11,7 +11,6 @@ public class DeadBeat : ActiveMob
 
     AggroState State = AggroState.Chasing;
     int SkillCounter = 1;
-    int SkillStack = 0;
 
 
     float ChargeDistance = Util.TileSize * 5;

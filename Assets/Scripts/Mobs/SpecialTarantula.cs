@@ -8,8 +8,7 @@ public class SpecialTarantula : ActiveMob
     float WebSpeed;
     float WebRange;
 
-    float WebShootCooldown = 8;
-    Timer WebShootTimer = new Timer();
+    Timer WebShootTimer = new Timer(8);
 
     protected override void onAggroUpdate()
     {
@@ -21,7 +20,7 @@ public class SpecialTarantula : ActiveMob
             {
                 target.GetComponent<EffectHandler>().AddEffect(new Effect.SpeedMuliplier(3, 0.7f));
             };
-            WebShootTimer.Start(WebShootCooldown);
+            WebShootTimer.Start();
         }
     }
 

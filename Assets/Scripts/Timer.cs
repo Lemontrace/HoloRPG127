@@ -10,7 +10,14 @@ public class Timer
 
     public void Start(float seconds)
     {
+        Seconds = seconds;
         Done = false;
         Util.DelayedExecutionManager.ScheduleAction(() => Done = true, seconds);
+    }
+
+    public void Start()
+    {
+        Done = false;
+        Util.DelayedExecutionManager.ScheduleAction(() => Done = true, Seconds);
     }
 }

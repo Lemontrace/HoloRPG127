@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Lui : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Timer BasicAttackTimer = new Timer(0.7f);
+    Timer BasicSkillTimer = new Timer(7);
+
+    private void Start()
     {
-        
+        BasicAttackTimer.Start();
+        BasicSkillTimer.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
