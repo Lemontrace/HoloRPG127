@@ -2,23 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class MoriCalliopeManager : MonoBehaviour
 {
-    public static CharacterMovement instance;
+    public static MoriCalliopeManager instance;
 
-    Vector2 direction;
+    Generic characterSetUp;
     Rigidbody2D rb;
+    Vector2 direction;
     float z = 0;
+
     public float directionIndex = 1;
+
+    [SerializeField] float basicAttackDamage = 0f;
+    [SerializeField] float lifeDrainDamage = 0f;
+    [SerializeField] float ultiDamage = 0f;
+
     [SerializeField] GameObject scythePrefab;
     [SerializeField] GameObject lifeDrainPrefab;
     [SerializeField] GameObject deadBeatsUltsPrefab;
-    [SerializeField] float skill1Timer = 0f;
-    [SerializeField] float skill2Timer = 0f;
-    [SerializeField] float skill3Timer = 0f;
+
+    [SerializeField] float skill1Cooldown = 0f;
+    [SerializeField] float skill2Cooldown = 0f;
+    [SerializeField] float skill3Cooldown = 0f;
+
     float skill1Counter = 0f;
     float skill2Counter = 0f;
     float skill3Counter = 0f;
+
     bool canUseSkill1 = true;
     bool canUseSkill2 = true;
     bool canUseSkill3 = true;
@@ -30,7 +40,8 @@ public class CharacterMovement : MonoBehaviour
         else
             Destroy(gameObject);
 
-        rb = GetComponent<Rigidbody2D>();
+        rb?.GetComponent<Rigidbody2D>();
+        characterSetUp?.GetComponent<Generic>();
     }
 
     private void Update()
@@ -41,20 +52,22 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z) && canUseSkill1)
         {
-
-            Instantiate(scythePrefab, transform.position, Quaternion.Euler(new Vector3(0, directionIndex == 1 || directionIndex == 4 ? 0 : 180, z)), transform);
+            GameObject g = Instantiate(scythePrefab, transform.position, Quaternion.Euler(new Vector3(0, directionIndex == 1 || directionIndex == 4 ? 0 : 180, z)), transform);
+            g.GetComponent<CharacterAttack>().damage = AttackDamage(basicAttackDamage);
             canUseSkill1 = false;
             skill1Counter = 0f;
         }
         if (Input.GetKeyDown(KeyCode.X) && canUseSkill2)
         {
-            Instantiate(lifeDrainPrefab, transform);
+            GameObject g = Instantiate(lifeDrainPrefab, transform);
+            g.GetComponent <CharacterAttack>().damage = AttackDamage(lifeDrainDamage);
             canUseSkill2 = false;
             skill2Counter = 0f;
         }
         if(Input.GetKeyDown(KeyCode.C) && canUseSkill3)
         {
-            Instantiate(deadBeatsUltsPrefab, transform);
+            GameObject g = Instantiate(deadBeatsUltsPrefab, transform);
+            g.GetComponent<CharacterAttack>().damage = AttackDamage(ultiDamage);
             canUseSkill3 = false;
             skill3Counter = 0f;
         }
@@ -69,13 +82,13 @@ public class CharacterMovement : MonoBehaviour
         if (canUseSkill1)
             return;
 
-        if(skill1Counter < skill1Timer)
+        if(skill1Counter < skill1Cooldown)
         {
             skill1Counter += Time.deltaTime;
         }
         else
         {
-            skill1Counter = skill1Timer;
+            skill1Counter = skill1Cooldown;
             canUseSkill1 = true;
         }
     }
@@ -85,13 +98,13 @@ public class CharacterMovement : MonoBehaviour
         if (canUseSkill2)
             return;
 
-        if (skill2Counter < skill2Timer)
+        if (skill2Counter < skill2Cooldown)
         {
             skill2Counter += Time.deltaTime;
         }
         else
         {
-            skill2Counter = skill2Timer;
+            skill2Counter = skill2Cooldown;
             canUseSkill2 = true;
         }
     }
@@ -101,13 +114,13 @@ public class CharacterMovement : MonoBehaviour
         if (canUseSkill3)
             return;
 
-        if (skill3Counter < skill3Timer)
+        if (skill3Counter < skill3Cooldown)
         {
             skill3Counter += Time.deltaTime;
         }
         else
         {
-            skill3Counter = skill3Timer;
+            skill3Counter = skill3Cooldown;
             canUseSkill2 = true;
         }
     }
@@ -135,9 +148,9 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-
-    private void FixedUpdate()
+    public float AttackDamage(float finalDamage)
     {
-        rb.MovePosition(rb.position + direction * 10 * Time.deltaTime);
+        return finalDamage < 0 ? 0 : finalDamage;
     }
+
 }

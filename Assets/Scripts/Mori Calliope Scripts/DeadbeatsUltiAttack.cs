@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadbeatsUltiAttack : MonoBehaviour
+public class DeadbeatsUltiAttack : CharacterAttack
 {
     float timer = 0f;
     [SerializeField] GameObject deadbeatsPrefab;

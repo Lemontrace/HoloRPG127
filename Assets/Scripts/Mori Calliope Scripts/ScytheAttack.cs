@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScytheAttack : MonoBehaviour
+public class ScytheAttack : CharacterAttack
 {
+    public float damage = 0f;
+
     float timer = 0f;
     float dir = 1f;
     float y = 0f;
@@ -15,14 +17,12 @@ public class ScytheAttack : MonoBehaviour
 
     private void Start()
     {
-        dir = CharacterMovement.instance.directionIndex;
+        dir = MoriCalliopeManager.instance.directionIndex;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         if (timer < 0.3f)
             timer += Time.deltaTime;
         else
@@ -48,7 +48,7 @@ public class ScytheAttack : MonoBehaviour
                 else
                 {
                     attackedEnemies.Add(collision);
-                    attackedEnemies[i].gameObject.name = "Enemy Hit " + Random.Range(0,20);
+                    attackedEnemies[i].gameObject.name = "Enemy Hit " + damage;
                     //foreach (var enemy in collision.GetComponents<IEnemy>())
                     //    enemy.EnemyAttacked();
 
