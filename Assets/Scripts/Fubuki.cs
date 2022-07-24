@@ -26,7 +26,8 @@ public class Fubuki : PlayableCharacter
     float SwordAuraSpeed = Util.TileSize * 5;
     float SwordAuraDelay = 1f;
 
-    override protected void Start()
+
+    private void Awake()
     {
         MaxHp = 1100;
         BaseDefence = 17;
@@ -38,8 +39,9 @@ public class Fubuki : PlayableCharacter
         Skill2Cooldown = 7f;
         Skill3 = Ult;
         Skill3Cooldown = 60f;
-
-
+    }
+    override protected void Start()
+    {
         //note : could use effect handler to implement shield
         var generic = GetComponent<Generic>();
         generic.OnHit += (damage) =>

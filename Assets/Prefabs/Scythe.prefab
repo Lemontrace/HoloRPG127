@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 668371725859447433}
   - component: {fileID: 668371725859447434}
   - component: {fileID: 2668479107886812752}
-  - component: {fileID: 4919896816399821011}
+  - component: {fileID: 4444509317951805685}
   m_Layer: 0
   m_Name: Scythe
   m_TagString: Untagged
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668371725859447435}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.53729963, w: 0.8433914}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -65}
 --- !u!212 &668371725859447433
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -7048589025602079961, guid: 27ae35b7b7a403845aed98588ea03cb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -208,7 +208,7 @@ PolygonCollider2D:
       - {x: 0.22999999, y: 0.049999997}
       - {x: 0.32999998, y: 0.26999998}
       - {x: 0.48, y: 0.62}
---- !u!114 &4919896816399821011
+--- !u!114 &4444509317951805685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,8 +217,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 668371725859447435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de53f3e495b198045b8f2d56aaf21bc9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f3348f1087e4bf43aad2fba879e31b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
-  DestroyOnHit: 0
+  DestroyOnHit: 1

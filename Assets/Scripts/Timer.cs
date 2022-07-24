@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Timer
 {
     public float Seconds;

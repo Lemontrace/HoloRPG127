@@ -22,6 +22,6 @@ public class ScytheAttack : MonoBehaviour
         else
             Destroy(gameObject);
 
-        transform.Rotate(new Vector3(0, 0, -1 * AttackArc / AttackDuration * Time.deltaTime));
+        transform.Rotate(0, 0, -1 * AttackArc / AttackDuration * Time.deltaTime);
     }
 }

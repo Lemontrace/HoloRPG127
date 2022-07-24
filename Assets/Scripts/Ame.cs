@@ -22,7 +22,7 @@ public class Ame : PlayableCharacter
     float RewindResolution = 0.1f;
     float RewindLength = 3f;
 
-    protected override void Start()
+    private void Awake()
     {
         MaxHp = 1000;
         BaseDefence = 10;
@@ -34,7 +34,10 @@ public class Ame : PlayableCharacter
         Skill2Cooldown = 20f;
         Skill3 = Rewind;
         Skill3Cooldown = 35f;
+    }
 
+    protected override void Start()
+    {
         PositionRecordTimer = RewindResolution;
         //initialize PastPositions
         for (int i = 0; i < RewindLength / RewindResolution; i++) PastPositions.AddLast(transform.position);

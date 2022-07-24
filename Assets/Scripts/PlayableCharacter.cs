@@ -62,9 +62,26 @@ abstract public class PlayableCharacter : MonoBehaviour
     protected void DecreaseTimers()
     {
         Skill1Timer -= Time.deltaTime;
+        if (Skill1Timer < 0) Skill1Timer = 0;
         Skill2Timer -= Time.deltaTime;
+        if (Skill2Timer < 0) Skill2Timer = 0;
         Skill3Timer -= Time.deltaTime;
+        if (Skill3Timer < 0) Skill3Timer = 0;
     }
 
     protected float DamageBuff => GetComponent<Generic>().DamageBuff;
+
+    protected GameObject GetClosestEnemy(float range)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector2)transform.position, range);
+        var minDist = float.PositiveInfinity;
+        GameObject closest = null;
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Enemy") &&
+                Vector2.Distance((Vector2)transform.position, (Vector2)collider.transform.position) < minDist)
+                closest = collider.gameObject;
+        }
+        return closest;
+    }
 }
