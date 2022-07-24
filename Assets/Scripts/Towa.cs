@@ -25,7 +25,7 @@ public class Towa : PlayableCharacter
     float UltRadious = 2;
     float Skill2CoolDownWhileUlt = 5f;
 
-    override protected void Start()
+    private void Awake()
     {
         MaxHp = 800;
         BaseDefence = 8;
@@ -37,7 +37,6 @@ public class Towa : PlayableCharacter
         Skill2Cooldown = 5f;
         Skill3 = Ult;
         Skill3Cooldown = 60f;
-        base.Start();
     }
 
     //Shoots Laser in a direction, slowing all enemies on path

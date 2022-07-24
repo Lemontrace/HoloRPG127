@@ -18,12 +18,11 @@ public class Chloe : PlayableCharacter
     float AssasinationDamage = 450;
     float AssasinationBleedDuration = 3;
 
-    override protected void Start()
+    private void Awake()
     {
         MaxHp = 800;
         BaseDefence = 9;
         BaseMovementSpeed = Util.SpeedUnitConversion(380);
-
 
         Skill1 = BasicAttack;
         Skill1Cooldown = 1;
@@ -31,8 +30,6 @@ public class Chloe : PlayableCharacter
         Skill2Cooldown = 5;
         Skill3 = Assasinate;
         Skill3Cooldown = 75;
-
-        base.Start();
     }
 
     void BasicAttack()

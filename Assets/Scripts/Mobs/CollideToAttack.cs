@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class CollideToAttack : MonoBehaviour
 {
-    private Timer AttackTimer = new Timer(1);
+    private Timer AttackTimer;
     float KnockbackDistance = Util.TileSize;
     Vector3 KnockbackDirection;
     float KnockbackTimer = 0;
     public delegate void OnAttackDelegate(GameObject target);
     public event OnAttackDelegate OnAttack;
 
-    private void FixedUpdate()
+    private void Start()
+    {
+        AttackTimer = new Timer(1);
+    }
+
+    private void Update()
     {
         if (KnockbackTimer > 0)
         {

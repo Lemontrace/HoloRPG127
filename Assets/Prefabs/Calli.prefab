@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94daed4ac6ab1d74ebb031e7793e59d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Skill1CoolDown: 0
-  Skill2CoolDown: 0
-  Skill3CoolDown: 0
-  scythePrefab: {fileID: 0}
-  lifeDrainPrefab: {fileID: 0}
-  deadBeatsUltsPrefab: {fileID: 0}
+  Skill1Cooldown: 0
+  Skill2Cooldown: 0
+  Skill3Cooldown: 0
+  ScythePrefab: {fileID: 668371725859447435, guid: 1fa9ff028fd15be4aa9dbd41c4a001d2, type: 3}
+  LifeDrainParticlePrefab: {fileID: 5903592933725542729, guid: f7859a9c0154aa749aa0be5f63eac77a, type: 3}
+  DeadBeatUltsPrefab: {fileID: 7094289403378128711, guid: f9212b7dc20b37f40b48a6bfe7e519db, type: 3}
 --- !u!114 &3089540782911908264
 MonoBehaviour:
   m_ObjectHideFlags: 0

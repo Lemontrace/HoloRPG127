@@ -21,7 +21,7 @@ public class Pekora : PlayableCharacter
     float CarrotBombExplosionRadious = 2;
     float CarrotBombHeight = 3 * Util.TileSize;
 
-    override protected void Start()
+    private void Awake()
     {
         MaxHp = 850;
         BaseDefence = 8;
@@ -33,7 +33,6 @@ public class Pekora : PlayableCharacter
         Skill2Cooldown = 14f;
         Skill3 = CarrotBomb;
         Skill3Cooldown = 50f;
-        base.Start();
     }
 
     void CarrotThrow()

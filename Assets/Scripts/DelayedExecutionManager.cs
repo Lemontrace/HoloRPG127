@@ -22,7 +22,7 @@ public class DelayedExecutionManager : MonoBehaviour
 
     private List<ActionInfo> AllActions;
 
-    void Start()
+    void Awake()
     {
         AllActions = new List<ActionInfo>();
     }
