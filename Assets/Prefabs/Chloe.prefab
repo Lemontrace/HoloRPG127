@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9029035078637024677}
   - component: {fileID: 9029035078637024678}
   - component: {fileID: 9029035078637024679}
-  - component: {fileID: 9029035078637024672}
+  - component: {fileID: 7832844737754687015}
   - component: {fileID: 9029035078637024699}
   m_Layer: 0
   m_Name: Chloe
@@ -110,7 +110,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.46}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!50 &9029035078637024672
+--- !u!50 &7832844737754687015
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -124,13 +124,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &9029035078637024699
 SpriteRenderer:
   m_ObjectHideFlags: 0

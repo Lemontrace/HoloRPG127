@@ -14,7 +14,6 @@ public class TowaCube : MonoBehaviour
     public float Radious;
     public float ScaleY;
     public float Angle;
-    public float Damage;
 
 
     float AngularVelocity = 180;
@@ -23,7 +22,6 @@ public class TowaCube : MonoBehaviour
     GameObject SeekTarget;
     float SeekRadious = Util.TileSize * 5;
     float SeekSpeed = Util.TileSize * 10;
-    float HitDistance = Util.TileSize * 0.5f;
 
     CubePhase Phase = CubePhase.Spin;
 
@@ -81,17 +79,11 @@ public class TowaCube : MonoBehaviour
 
     void UpdateOnSeek()
     {
-        if (SeekTarget == null) { 
+        if (SeekTarget == null) {
             Destroy(gameObject);
             return;
         }
-
         transform.position = Vector3.MoveTowards(transform.position, SeekTarget.transform.position, SeekSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, SeekTarget.transform.position) < HitDistance)
-        {
-            SeekTarget.GetComponent<Generic>().Damage(Damage);
-            Destroy(gameObject);
-        }
     }
 
     

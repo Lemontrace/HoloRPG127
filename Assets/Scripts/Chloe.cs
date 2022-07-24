@@ -26,11 +26,11 @@ public class Chloe : PlayableCharacter
 
 
         Skill1 = BasicAttack;
-        Skill1CoolDown = 1;
+        Skill1Cooldown = 1;
         Skill2 = KnifeThrow;
-        Skill2CoolDown = 5;
+        Skill2Cooldown = 5;
         Skill3 = Assasinate;
-        Skill3CoolDown = 75;
+        Skill3Cooldown = 75;
 
         base.Start();
     }
@@ -58,10 +58,14 @@ public class Chloe : PlayableCharacter
 
     void KnifeThrow()
     {
-        var knife = Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowSpeed, KnifeThrowRange).GetComponent<FriendlyObject>();
+        var knife = Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowSpeed, KnifeThrowRange).GetComponent<FriendlyProjectile>();
         knife.Damage = KnifeThrowDamage;
         knife.DestroyOnHit = true;
-        
+        knife.OnHit += (target) =>
+        {
+            for (int delay = 1; delay <= 3; ++delay)
+                Util.DelayedExecutionManager.ScheduleAction(() => target.GetComponent<Generic>().Damage(10), delay);
+        };
     }
     void Assasinate()
     {
@@ -82,7 +86,11 @@ public class Chloe : PlayableCharacter
             }
         }
 
-        if (seekTarget == null) return;
+        if (seekTarget == null)
+        {
+            Skill3Timer = 0;
+            return;
+        }
 
         //teleport
         transform.position = seekTarget.transform.position + 0.5f * Util.TileSize * GetComponent<Generic>().Facing;
