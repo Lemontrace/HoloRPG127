@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAttack : MonoBehaviour
+public class DeadbeatsUlt : MonoBehaviour
 {
-    public float damage; 
+
 }

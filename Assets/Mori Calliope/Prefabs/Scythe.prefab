@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 668371725859447433}
   - component: {fileID: 668371725859447434}
   - component: {fileID: 2668479107886812752}
+  - component: {fileID: 4919896816399821011}
   m_Layer: 0
   m_Name: Scythe
   m_TagString: Untagged
@@ -96,8 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0298ddd85379ae47a2cd520d36a4aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfEnemies: []
-  attackedEnemies: []
+  AttackArc: 0
 --- !u!60 &2668479107886812752
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -208,3 +208,17 @@ PolygonCollider2D:
       - {x: 0.22999999, y: 0.049999997}
       - {x: 0.32999998, y: 0.26999998}
       - {x: 0.48, y: 0.62}
+--- !u!114 &4919896816399821011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668371725859447435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de53f3e495b198045b8f2d56aaf21bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 0
+  DestroyOnHit: 0

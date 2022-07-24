@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeDrainAttack : CharacterAttack
+public class LifeDrainAttack : MonoBehaviour
 {
     float timer = 0f;
     List<Collider2D> listOfEnemies = new List<Collider2D>();

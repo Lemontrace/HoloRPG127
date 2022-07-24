@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7094289403378128715}
   - component: {fileID: 7094289403378128714}
   - component: {fileID: 7094289403378128709}
-  - component: {fileID: 7094289403378128708}
+  - component: {fileID: 3216065821028803295}
   m_Layer: 0
   m_Name: DeadBeats Ults
   m_TagString: Untagged
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.39
---- !u!114 &7094289403378128708
+--- !u!114 &3216065821028803295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,4 +112,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f606b1086a68ce64abf31801dd24e721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadbeatsPrefab: {fileID: 7252880922328918856, guid: e1b62a2416d52b44fbffc140c74708ab, type: 3}
+  damage: 0
+  deadbeatsPrefab: {fileID: 0}
