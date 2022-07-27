@@ -14,6 +14,7 @@ public class Suisei : PlayableCharacter
     float starTravelDistance = Util.TileSize * 4;
     float starTravelDuration = 4f;
 
+    public SpriteRenderer meteoriteRenderer;
     float metoeriteDamage = 110f;
     float enemyDetectionRadius = Util.TileSize * 4;
     float metoeriteDamageRadius = Util.TileSize * 4;
@@ -67,18 +68,28 @@ public class Suisei : PlayableCharacter
         Collider2D nearestEnemyCollider = Util.GetNearestEnemyFromPoint(colliders, transform.position);
         if (!nearestEnemyCollider) return;
 
-        center = nearestEnemyCollider.transform.position;
-        colliders = Physics2D.OverlapCircleAll(new Vector2(center.x, center.y), metoeriteDamageRadius);
-
+        meteoriteRenderer.enabled = true;
+        meteoriteRenderer.transform.position = nearestEnemyCollider.transform.position;
         float metoeriteDamage = this.metoeriteDamage + DamageBuff;
 
-        foreach (var collider in colliders)
+        for (int tick = 0; tick < metoeriteTickDamageDuration; ++tick)
         {
-            if (!collider.gameObject.CompareTag("Enemy")) continue;
-            for (int tick = 0; tick < metoeriteTickDamageDuration; ++tick)
+            Util.DelayedExecutionManager.ScheduleAction(() =>
             {
-                Util.DelayedExecutionManager.ScheduleAction(() => { collider.GetComponent<Generic>().Damage(metoeriteDamage); }, tick + 1);
-            }
+                var colliders = Physics2D.OverlapCircleAll(meteoriteRenderer.transform.position, metoeriteDamageRadius);
+
+                foreach (var collider in colliders)
+                {
+                    if (!collider.gameObject.CompareTag("Enemy")) continue;
+                    collider.GetComponent<Generic>().Damage(metoeriteDamage);
+                }
+            }, tick + 1);
         }
+
+        Util.DelayedExecutionManager.ScheduleAction(() =>
+        {
+            meteoriteRenderer.enabled = false;
+            meteoriteRenderer.transform.position = transform.position;
+        }, metoeriteTickDamageDuration + 1);
     }
 }
