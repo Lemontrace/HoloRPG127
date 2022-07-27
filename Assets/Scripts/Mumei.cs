@@ -21,9 +21,16 @@ public class Mumei : PlayableCharacter
 
     override protected void Start()
     {
+        MaxHp = 1000;
+        BaseDefence = 7;
+        BaseMovementSpeed = Util.SpeedUnitConversion(355);
+
         Skill1 = FlatStrike;
+        Skill1Cooldown = 1;
         Skill2 = EatBerry;
+        Skill2Cooldown = 1;
         Skill3 = Nightmare;
+        Skill3Cooldown = 1;
     }
 
     void FlatStrike()

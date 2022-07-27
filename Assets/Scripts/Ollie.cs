@@ -18,6 +18,10 @@ public class Ollie : PlayableCharacter
 
     override protected void Start()
     {
+        MaxHp = 900;
+        BaseDefence = 0;
+        BaseMovementSpeed = Util.SpeedUnitConversion(340);
+
         Skill1 = BasicAttack;
         Skill1Cooldown = 0.8f;
         Skill2 = SummonZombie;

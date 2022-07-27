@@ -17,6 +17,11 @@ public class OllieSummon : MonoBehaviour
 
     private void Start()
     {
+        var generic = GetComponent<Generic>();
+        generic.MaxHitPoint = generic.HitPoint = 100;
+        generic.BaseDefence = 0;
+        generic.BaseMovementSpeed = Util.SpeedUnitConversion(340);
+
         var colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
         target = Util.GetNearestEnemyFromPoint(colliders, transform.position);
     }

@@ -21,6 +21,10 @@ public class Suisei : PlayableCharacter
 
     override protected void Start()
     {
+        MaxHp = 850;
+        BaseDefence = 8;
+        BaseMovementSpeed = Util.SpeedUnitConversion(355);
+
         Skill1 = BasicAttack;
         Skill1Cooldown = 1;
         Skill2 = ThrowingStar;
