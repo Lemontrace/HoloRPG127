@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Mumei : PlayableCharacter
 {
-    public SpriteRenderer effectRenderer;
-
     float basicAttackReach = Util.TileSize * 0.5f;
     float basicAttackWidth = Util.TileSize * 1.5f;
     float basicAttackDamage = 50f;
+
+    public SpriteRenderer effectRenderer;
 
     public Sprite berrySprite;
     float healAmount = 80f;
@@ -22,8 +22,8 @@ public class Mumei : PlayableCharacter
     override protected void Start()
     {
         Skill1 = FlatStrike;
-        Skill2 = SkillOne;
-        Skill3 = SkillTwo;
+        Skill2 = EatBerry;
+        Skill3 = Nightmare;
     }
 
     void FlatStrike()
@@ -41,7 +41,7 @@ public class Mumei : PlayableCharacter
             if (collider.gameObject.CompareTag("Enemy")) collider.GetComponent<Generic>().Damage(basicAttackDamage);
     }
 
-    void SkillOne()
+    void EatBerry()
     {
         GetComponent<Generic>().Heal(healAmount);
         GetComponent<EffectHandler>().AddEffect(new Effect.DamageBuff(damageBuffDuration, damageBuffAmount));
@@ -49,7 +49,7 @@ public class Mumei : PlayableCharacter
         Util.DelayedExecutionManager.ScheduleAction(DisableEffect, 2f);
     }
 
-    void SkillTwo()
+    void Nightmare()
     {
         var center = transform.position;
         center.y -= 0.5f * Util.TileSize;

@@ -18,15 +18,15 @@ public class Ollie : PlayableCharacter
 
     override protected void Start()
     {
-        Skill1 = NormalHit;
+        Skill1 = BasicAttack;
         Skill1CoolDown = 0.8f;
-        Skill2 = SkillOne;
+        Skill2 = SummonZombie;
         Skill2CoolDown = 25;
-        Skill3 = Ultimate;
+        Skill3 = SwordStrike;
         Skill3CoolDown = 80;
     }
 
-    void NormalHit()
+    void BasicAttack()
     {
         Vector3 facing = GetComponent<Generic>().Facing;
         Vector3 point = transform.position + facing * (basicAttackReach / 2 + 0.5f * Util.TileSize);
@@ -44,7 +44,7 @@ public class Ollie : PlayableCharacter
         }
     }
 
-    void SkillOne()
+    void SummonZombie()
     {
         for (int i = 0; i < summonAmount; ++i)
         {
@@ -54,7 +54,7 @@ public class Ollie : PlayableCharacter
         }
     }
 
-    void Ultimate()
+    void SwordStrike()
     {
         Vector3 facing = GetComponent<Generic>().Facing;
         Vector3 point = transform.position + facing * (ultimateReach / 2 + 0.5f * Util.TileSize);

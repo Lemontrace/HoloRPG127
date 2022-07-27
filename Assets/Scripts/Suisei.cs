@@ -21,15 +21,15 @@ public class Suisei : PlayableCharacter
 
     override protected void Start()
     {
-        Skill1 = NormalHit;
+        Skill1 = BasicAttack;
         Skill1CoolDown = 1;
-        Skill2 = SkillOne;
+        Skill2 = ThrowingStar;
         Skill2CoolDown = 15;
-        Skill3 = Ultimate;
+        Skill3 = Meteorite;
         Skill3CoolDown = 80;
     }
 
-    void NormalHit()
+    void BasicAttack()
     {
         Vector3 facing = GetComponent<Generic>().Facing;
         Vector3 point = transform.position + facing * (basicAttackReach / 2 + 0.5f * Util.TileSize);
@@ -44,7 +44,7 @@ public class Suisei : PlayableCharacter
             if (collider.gameObject.CompareTag("Enemy")) collider.GetComponent<Generic>().Damage(basicAttackDamage);
     }
 
-    void SkillOne()
+    void ThrowingStar()
     {
         float starTravelSpeed = starTravelDistance / starTravelDuration;
         var star = Util.SpawnLinearProjectile(gameObject, starPrefab, starTravelSpeed, starTravelDistance).GetComponent<FriendlyObject>();
@@ -54,16 +54,16 @@ public class Suisei : PlayableCharacter
         star.ExplodeRadius = starDamageRadius;
     }
 
-    void Ultimate()
+    void Meteorite()
     {
         var center = transform.position;
         center.y -= 0.5f * Util.TileSize;
         var colliders = Physics2D.OverlapCircleAll(new Vector2(center.x, center.y), enemyDetectionRadius);
 
-        Collider2D nearestEnemyCollider = getNearestEnemy(colliders);
+        Collider2D nearestEnemyCollider = Util.GetNearestEnemyFromPoint(colliders, transform.position);
         if (!nearestEnemyCollider) return;
 
-        center = getNearestEnemy(colliders).transform.position;
+        center = nearestEnemyCollider.transform.position;
         colliders = Physics2D.OverlapCircleAll(new Vector2(center.x, center.y), metoeriteDamageRadius);
 
         float metoeriteDamage = this.metoeriteDamage + DamageBuff;
@@ -76,26 +76,5 @@ public class Suisei : PlayableCharacter
                 Util.DelayedExecutionManager.ScheduleAction(() => { collider.GetComponent<Generic>().Damage(metoeriteDamage); }, tick + 1);
             }
         }
-    }
-
-    private Collider2D getNearestEnemy(Collider2D[] colliders)
-    {
-        if (colliders.Length == 0) return null;
-
-        int nearestIndex = 0;
-        float nearestDistance = float.PositiveInfinity;
-        for (int i = 0; i < colliders.Length; ++i)
-        {
-            if (!colliders[i].gameObject.CompareTag("Enemy")) continue;
-
-            float distance = Mathf.Abs(Vector3.Distance(transform.position, colliders[i].transform.position));
-            if (distance < nearestDistance)
-            {
-                nearestIndex = i;
-                nearestDistance = distance;
-            }
-        }
-
-        return colliders[nearestIndex];
     }
 }
