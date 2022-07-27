@@ -82,12 +82,4 @@ public class Ollie : PlayableCharacter
             nearestEnemyGeneric.Damage(ultimateDamage);
         }
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Vector3 facing = GetComponent<Generic>().Facing;
-        Vector3 point = transform.position + facing * (basicAttackReach / 2 + 0.5f * Util.TileSize);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(point, basicAttackReach);
-    }
 }

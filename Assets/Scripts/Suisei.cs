@@ -14,7 +14,7 @@ public class Suisei : PlayableCharacter
     float starTravelDistance = Util.TileSize * 4;
     float starTravelDuration = 4f;
 
-    public SpriteRenderer meteoriteRenderer;
+    [SerializeReference] private GameObject meteoritePrefab;
     float metoeriteDamage = 110f;
     float enemyDetectionRadius = Util.TileSize * 4;
     float metoeriteDamageRadius = Util.TileSize * 4;
@@ -68,15 +68,14 @@ public class Suisei : PlayableCharacter
         Collider2D nearestEnemyCollider = Util.GetNearestEnemyFromPoint(colliders, transform.position);
         if (!nearestEnemyCollider) return;
 
-        meteoriteRenderer.enabled = true;
-        meteoriteRenderer.transform.position = nearestEnemyCollider.transform.position;
+        var meteorite = Instantiate(meteoritePrefab, nearestEnemyCollider.transform.position, Quaternion.identity);
         float metoeriteDamage = this.metoeriteDamage + DamageBuff;
 
         for (int tick = 0; tick < metoeriteTickDamageDuration; ++tick)
         {
             Util.DelayedExecutionManager.ScheduleAction(() =>
             {
-                var colliders = Physics2D.OverlapCircleAll(meteoriteRenderer.transform.position, metoeriteDamageRadius);
+                var colliders = Physics2D.OverlapCircleAll(meteorite.transform.position, metoeriteDamageRadius);
 
                 foreach (var collider in colliders)
                 {
@@ -86,10 +85,6 @@ public class Suisei : PlayableCharacter
             }, tick + 1);
         }
 
-        Util.DelayedExecutionManager.ScheduleAction(() =>
-        {
-            meteoriteRenderer.enabled = false;
-            meteoriteRenderer.transform.position = transform.position;
-        }, metoeriteTickDamageDuration + 1);
+        Destroy(meteorite, metoeriteTickDamageDuration + 1);
     }
 }
