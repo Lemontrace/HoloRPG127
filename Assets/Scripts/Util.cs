@@ -28,4 +28,25 @@ public static class Util
         projectile.Range = range;
         return projectile.gameObject;
     }
+
+    public static Collider2D GetNearestEnemyFromPoint(Collider2D[] colliders, Vector3 point)
+    {
+        if (colliders.Length == 0) return null;
+
+        int nearestIndex = 0;
+        float nearestDistance = float.PositiveInfinity;
+        for (int i = 0; i < colliders.Length; ++i)
+        {
+            if (!colliders[i].gameObject.CompareTag("Enemy")) continue;
+
+            float distance = Mathf.Abs(Vector3.Distance(point, colliders[i].transform.position));
+            if (distance < nearestDistance)
+            {
+                nearestIndex = i;
+                nearestDistance = distance;
+            }
+        }
+
+        return colliders[nearestIndex];
+    }
 }
