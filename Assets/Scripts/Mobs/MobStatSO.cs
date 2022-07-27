@@ -8,4 +8,5 @@ public class MobStatSO : ScriptableObject
     public float HitPoint;
     public float Attack;
     public float BaseMovementSpeed;
+    public float BaseDefence;
 }

@@ -22,11 +22,11 @@ public class Suisei : PlayableCharacter
     override protected void Start()
     {
         Skill1 = BasicAttack;
-        Skill1CoolDown = 1;
+        Skill1Cooldown = 1;
         Skill2 = ThrowingStar;
-        Skill2CoolDown = 15;
+        Skill2Cooldown = 15;
         Skill3 = Meteorite;
-        Skill3CoolDown = 80;
+        Skill3Cooldown = 80;
     }
 
     void BasicAttack()
@@ -47,7 +47,7 @@ public class Suisei : PlayableCharacter
     void ThrowingStar()
     {
         float starTravelSpeed = starTravelDistance / starTravelDuration;
-        var star = Util.SpawnLinearProjectile(gameObject, starPrefab, starTravelSpeed, starTravelDistance).GetComponent<FriendlyObject>();
+        var star = Util.SpawnLinearProjectile(gameObject, starPrefab, starTravelSpeed, starTravelDistance).GetComponent<FriendlyProjectile>();
         star.Damage = starDamage;
         star.DestroyOnHit = true;
         star.Explosive = true;

@@ -18,21 +18,18 @@ public class Chloe : PlayableCharacter
     float AssasinationDamage = 450;
     float AssasinationBleedDuration = 3;
 
-    override protected void Start()
+    private void Awake()
     {
         MaxHp = 800;
         BaseDefence = 9;
         BaseMovementSpeed = Util.SpeedUnitConversion(380);
 
-
         Skill1 = BasicAttack;
-        Skill1CoolDown = 1;
+        Skill1Cooldown = 1;
         Skill2 = KnifeThrow;
-        Skill2CoolDown = 5;
+        Skill2Cooldown = 5;
         Skill3 = Assasinate;
-        Skill3CoolDown = 75;
-
-        base.Start();
+        Skill3Cooldown = 75;
     }
 
     void BasicAttack()
@@ -58,10 +55,14 @@ public class Chloe : PlayableCharacter
 
     void KnifeThrow()
     {
-        var knife = Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowSpeed, KnifeThrowRange).GetComponent<FriendlyObject>();
+        var knife = Util.SpawnLinearProjectile(gameObject, KnifePrefab, KnifeThrowSpeed, KnifeThrowRange).GetComponent<FriendlyProjectile>();
         knife.Damage = KnifeThrowDamage;
         knife.DestroyOnHit = true;
-        
+        knife.OnHit += (target) =>
+        {
+            for (int delay = 1; delay <= 3; ++delay)
+                Util.DelayedExecutionManager.ScheduleAction(() => target.GetComponent<Generic>().Damage(10), delay);
+        };
     }
     void Assasinate()
     {
@@ -82,7 +83,11 @@ public class Chloe : PlayableCharacter
             }
         }
 
-        if (seekTarget == null) return;
+        if (seekTarget == null)
+        {
+            Skill3Timer = 0;
+            return;
+        }
 
         //teleport
         transform.position = seekTarget.transform.position + 0.5f * Util.TileSize * GetComponent<Generic>().Facing;

@@ -19,11 +19,11 @@ public class Ollie : PlayableCharacter
     override protected void Start()
     {
         Skill1 = BasicAttack;
-        Skill1CoolDown = 0.8f;
+        Skill1Cooldown = 0.8f;
         Skill2 = SummonZombie;
-        Skill2CoolDown = 25;
+        Skill2Cooldown = 25;
         Skill3 = SwordStrike;
-        Skill3CoolDown = 80;
+        Skill3Cooldown = 80;
     }
 
     void BasicAttack()

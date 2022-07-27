@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8025600077832345584}
   - component: {fileID: 8025600077832345587}
   - component: {fileID: 8025600077832345586}
-  - component: {fileID: 8025600077832345589}
+  - component: {fileID: 5551249140512758214}
   - component: {fileID: 8025600077832345582}
   m_Layer: 0
   m_Name: Towa
@@ -52,7 +52,7 @@ MonoBehaviour:
   Skill1CoolDown: 0
   Skill2CoolDown: 0
   Skill3CoolDown: 0
-  LaserPrefab: {fileID: 8455757110927451384, guid: 26b78e43e45cd694f9dfadc19c0527ca, type: 3}
+  LaserSpritePrefab: {fileID: 8455757110927451384, guid: 26b78e43e45cd694f9dfadc19c0527ca, type: 3}
   CubePrefab: {fileID: 25481836769503538, guid: 3abe9c2a7291807428a0f8efbca4a548, type: 3}
   SnowstormPrefab: {fileID: 7984732500036696827, guid: a6d01e09ce3885447ba20421da99f008, type: 3}
 --- !u!114 &8025600077832345585
@@ -112,7 +112,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.46}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!50 &8025600077832345589
+--- !u!50 &5551249140512758214
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -120,19 +120,19 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8025600077832345591}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &8025600077832345582
 SpriteRenderer:
   m_ObjectHideFlags: 0

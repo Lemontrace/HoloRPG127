@@ -6,7 +6,8 @@ public static class Util
 {
     public static float SpeedUnitConversion(float speed) => speed / 330 * 1.5f * TileSize;
 
-    public static GameObject Player { get { return GameObject.FindGameObjectWithTag("Player"); } }
+    public static GameObject Player
+        => GameObject.FindGameObjectWithTag("Player");
 
     public static DelayedExecutionManager DelayedExecutionManager
         => GameObject.Find("Managers").GetComponent<DelayedExecutionManager>();
@@ -22,7 +23,7 @@ public static class Util
         var position = thrower.transform.position + 0.5f * Util.TileSize * facing;
         var rotation = Quaternion.FromToRotation(Vector3.right, facing);
 
-        var projectile = GameObject.Instantiate(projectilePrefab, position, rotation).GetComponent<LinearProjectile>();
+        var projectile = GameObject.Instantiate(projectilePrefab, position, rotation).GetComponent<LinearMovement>();
         projectile.Direction = facing;
         projectile.Speed = speed;
         projectile.Range = range;

@@ -22,19 +22,22 @@ public class Ame : PlayableCharacter
     float RewindResolution = 0.1f;
     float RewindLength = 3f;
 
-    protected override void Start()
+    private void Awake()
     {
         MaxHp = 1000;
         BaseDefence = 10;
         BaseMovementSpeed = Util.SpeedUnitConversion(350);
 
         Skill1 = Shoot;
-        Skill1CoolDown = 0.6f;
+        Skill1Cooldown = 0.6f;
         Skill2 = GroundPound;
-        Skill2CoolDown = 20f;
+        Skill2Cooldown = 20f;
         Skill3 = Rewind;
-        Skill3CoolDown = 35f;
+        Skill3Cooldown = 35f;
+    }
 
+    protected override void Start()
+    {
         PositionRecordTimer = RewindResolution;
         //initialize PastPositions
         for (int i = 0; i < RewindLength / RewindResolution; i++) PastPositions.AddLast(transform.position);
@@ -69,15 +72,15 @@ public class Ame : PlayableCharacter
             GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
 
             //set its speed and damage
-            bullet.GetComponent<LinearProjectile>().Speed = BulletSpeed;
-            bullet.GetComponent<FriendlyObject>().Damage = BulletDamage + DamageBuff / BulletCount;
+            bullet.GetComponent<LinearMovement>().Speed = BulletSpeed;
+            bullet.GetComponent<FriendlyProjectile>().Damage = BulletDamage + DamageBuff / BulletCount;
 
             //add randomness to its direction
             Quaternion randomness = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-BulletSpread / 2, +BulletSpread / 2));
-            bullet.GetComponent<LinearProjectile>().Direction = randomness * GetComponent<Generic>().Facing;
+            bullet.GetComponent<LinearMovement>().Direction = randomness * GetComponent<Generic>().Facing;
 
             //set random range
-            bullet.GetComponent<LinearProjectile>().Range = UnityEngine.Random.Range(MaxBulletRange / 3, MaxBulletRange);
+            bullet.GetComponent<LinearMovement>().Range = UnityEngine.Random.Range(MaxBulletRange / 3, MaxBulletRange);
 
         }
 
@@ -101,6 +104,7 @@ public class Ame : PlayableCharacter
     {
         //make the character unable to move during animation
         GetComponent<EffectHandler>().AddEffect(new Effect.Stun(RewindDelay));
+        GetComponent<EffectHandler>().AddEffect(new Effect.Invincibility(RewindDelay));
         //save rewind position
         Vector3 rewindPosition = PastPositions.First.Value;
         //TODO : start rewind animation

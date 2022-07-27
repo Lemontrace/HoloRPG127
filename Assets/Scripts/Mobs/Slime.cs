@@ -24,8 +24,8 @@ public class Slime : ActiveMob
         var generic = GetComponent<Generic>();
         generic.Facing = direction;
 
-        if (distance < AggroRadious * 0.7f) direction *= -1;
-        else if (distance > AggroRadious * 0.7f && distance < AggroRadious) direction = Vector3.zero;
+        if (distance < AggroRadious * 0.6f) direction *= -1;
+        else if (distance > AggroRadious * 0.6f && distance < AggroRadious) direction = Vector3.zero;
         var speed = generic.MovementSpeed;
         transform.Translate(speed * Time.deltaTime * direction);
 
@@ -33,7 +33,7 @@ public class Slime : ActiveMob
         if (AttackTimer.Done)
         {
             AttackTimer.Start(AttackCooldown);
-            var slime = Util.SpawnLinearProjectile(gameObject, ProjectilePrefab, ProjectileSpeed, AttackRange).GetComponent<HostileObject>();
+            var slime = Util.SpawnLinearProjectile(gameObject, ProjectilePrefab, ProjectileSpeed, AttackRange).GetComponent<HostileProjectile>();
             slime.Damage = Stats.Attack;
         }
     }

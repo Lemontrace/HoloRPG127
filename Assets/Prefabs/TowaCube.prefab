@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8580061189982548120}
   - component: {fileID: 4180553126764781513}
   - component: {fileID: 1485527464350377839}
-  - component: {fileID: 3234245326515147803}
+  - component: {fileID: 9012241403590201644}
   m_Layer: 0
   m_Name: TowaCube
   m_TagString: Untagged
@@ -128,7 +128,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
---- !u!114 &3234245326515147803
+--- !u!114 &9012241403590201644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
