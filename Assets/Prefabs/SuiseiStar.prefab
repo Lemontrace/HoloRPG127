@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6816419566863118323}
   - component: {fileID: 4158617095191049501}
   - component: {fileID: 2954224356190635942}
-  - component: {fileID: 5066998145637890671}
+  - component: {fileID: 6291322984131184455}
   - component: {fileID: -631760369273499572}
-  - component: {fileID: 3802588623886732281}
+  - component: {fileID: 8627531197995293215}
   m_Layer: 0
   m_Name: SuiseiStar
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2690569631389320337}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.361745, y: -2.6111789, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,8 +101,8 @@ MonoBehaviour:
   Speed: 0
   Direction: {x: 0, y: 0, z: 0}
   Range: 0
---- !u!70 &5066998145637890671
-CapsuleCollider2D:
+--- !u!58 &6291322984131184455
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,12 +111,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.66, y: 0.16}
-  m_Direction: 1
+  m_Offset: {x: 0, y: -0.03}
+  serializedVersion: 2
+  m_Radius: 0.35
 --- !u!50 &-631760369273499572
 Rigidbody2D:
   serializedVersion: 4
@@ -138,7 +138,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3802588623886732281
+--- !u!114 &8627531197995293215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,10 +147,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2690569631389320337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f3348f1087e4bf43aad2fba879e31b0, type: 3}
+  m_Script: {fileID: 11500000, guid: d3db5f4af1582974baa15a74dd706d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
   DestroyOnHit: 1
-  Explosive: 1
+  ExplodeDamage: 0
   ExplodeRadius: 0

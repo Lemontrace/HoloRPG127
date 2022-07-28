@@ -52,10 +52,9 @@ public class Suisei : PlayableCharacter
     void ThrowingStar()
     {
         float starTravelSpeed = starTravelDistance / starTravelDuration;
-        var star = Util.SpawnLinearProjectile(gameObject, starPrefab, starTravelSpeed, starTravelDistance).GetComponent<FriendlyProjectile>();
-        star.Damage = starDamage;
+        var star = Util.SpawnLinearProjectile(gameObject, starPrefab, starTravelSpeed, starTravelDistance).GetComponent<FriendlyExplosiveProjectile>();
+        star.ExplodeDamage = starDamage;
         star.DestroyOnHit = true;
-        star.Explosive = true;
         star.ExplodeRadius = starDamageRadius;
     }
 
